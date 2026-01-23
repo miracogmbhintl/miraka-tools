@@ -1,0 +1,72 @@
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🚀 MIRAKA & CO. TOOLS - QUICK REFERENCE CARD                ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+📦 DEPLOYMENT PACKAGE
+├─ File: miraka-tools-deployment.zip
+├─ Size: 921 KB
+└─ Location: Root directory
+
+📚 DOCUMENTATION
+├─ DEPLOYMENT_INDEX.md (start here)
+├─ CLOUDFLARE_PAGES_MANUAL_DEPLOY.md (step-by-step)
+├─ DEPLOYMENT_ARCHITECTURE.md (diagrams)
+└─ DEPLOYMENT_TROUBLESHOOTING.md (fixes)
+
+🌐 ARCHITECTURE
+miraka.ch/tools → [Webflow] → YOUR-PROJECT.pages.dev → [OpenAI]
+
+🔑 ENVIRONMENT VARIABLES
+└─ OPENAI_API_KEY = sk-proj-... (required)
+
+✅ 9-STEP DEPLOYMENT
+1. Download miraka-tools-deployment.zip
+2. Extract dist/ folder
+3. Go to https://dash.cloudflare.com/
+4. Workers & Pages → Create → Pages → Upload assets
+5. Name: miraka-tools
+6. Upload ALL files from dist/
+7. Settings → Environment variables → Add OPENAI_API_KEY
+8. Deployments → Retry deployment
+9. Test at YOUR-PROJECT.pages.dev/tools
+
+🧪 TEST COMMANDS
+Homepage:  curl YOUR-PROJECT.pages.dev/
+Tools:     curl YOUR-PROJECT.pages.dev/tools
+API:       curl -X POST YOUR-PROJECT.pages.dev/api/analyze-website \
+             -H "Content-Type: application/json" \
+             -d '{"url": "https://example.com"}'
+
+🔗 WEBFLOW EMBED
+<iframe src="https://YOUR-PROJECT.pages.dev/tools" 
+        width="100%" height="100vh" frameborder="0"></iframe>
+
+⚠️  IMPORTANT
+• Redeploy after adding environment variables
+• Upload contents of dist/, not the dist/ folder itself
+• Ensure _worker.js/ is at root level
+
+🐛 COMMON ISSUES
+├─ Functions not enabled? → Check _worker.js/ uploaded
+├─ API 500 error? → Add OPENAI_API_KEY and redeploy
+└─ Assets 404? → Ensure _astro/ folder uploaded
+
+📊 WHAT'S INCLUDED
+✅ 6 fully functional tools
+✅ AI Website Intelligence (GPT-4)
+✅ Miraka & Co. branding
+✅ SSR enabled
+✅ PDF download
+✅ Professional review link
+
+🎯 KEY FACTS
+• No custom domain needed
+• No DNS changes
+• No CLI tools required
+• Webflow controls public URL
+• Cloudflare handles backend only
+
+📖 NEXT STEP
+Open: CLOUDFLARE_PAGES_MANUAL_DEPLOY.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

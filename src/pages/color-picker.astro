@@ -1,0 +1,15 @@
+---
+import MainLayout from '../layouts/main.astro';
+import ToolsShell from '../components/ToolsShell';
+import ColorPickerTool from '../components/ColorPickerTool';
+---
+
+<MainLayout>
+  <ToolsShell 
+    client:only="react"
+    title="Color Picker"
+    currentPath="/color-picker"
+  >
+    <ColorPickerTool client:only="react" />
+  </ToolsShell>
+</MainLayout>

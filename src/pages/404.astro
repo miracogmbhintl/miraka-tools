@@ -1,0 +1,8 @@
+---
+import MainLayout from '../layouts/main.astro';
+import NotFoundWrapper from '../components/NotFoundWrapper';
+---
+
+<MainLayout>
+  <NotFoundWrapper client:only="react" />
+</MainLayout>

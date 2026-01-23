@@ -1,0 +1,15 @@
+---
+import MainLayout from '../layouts/main.astro';
+import ToolsShell from '../components/ToolsShell';
+import ToolsPage from '../components/ToolsPage';
+---
+
+<MainLayout>
+  <ToolsShell 
+    client:only="react"
+    title="Tools"
+    currentPath="/tools"
+  >
+    <ToolsPage client:only="react" />
+  </ToolsShell>
+</MainLayout>
