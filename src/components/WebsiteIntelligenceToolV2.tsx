@@ -507,11 +507,35 @@ export default function AnalysisPageV2() {
 
   const handleDownloadPDF = async () => {
     if (!analysisData) return;
-    const { generateIntelligencePDF } = await import('../lib/generateIntelligencePDF');
-    generateIntelligencePDF({
-      url,
-      analysisData
-    });
+    
+    try {
+      const response = await fetch(`${baseUrl}/api/generate-pdf`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          url,
+          analysisData
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to generate PDF');
+      }
+
+      const { html } = await response.json();
+      
+      // Open in new window and trigger print
+      const printWindow = window.open('', '_blank');
+      if (printWindow) {
+        printWindow.document.write(html);
+        printWindow.document.close();
+      }
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Failed to generate PDF. Please try again.');
+    }
   };
 
   const handleRequestReview = () => {
@@ -1326,7 +1350,7 @@ export default function AnalysisPageV2() {
         {/* Logo - Mobile Only */}
         <div className="intel-logo">
           <img 
-            src="https://cdn.prod.website-files.com/68dc2b9c31cb83ac9f84a1af/68e0480bc44f1d28032afb51_LOGO%20MIRAKA%20%26%20CO%20PLAIN%20TEXT.png"
+            src="https://cdn.prod.website-files.com/68dc2b9c31cb83ac9f84a1af/68e0480bc44f1d28032afb51_LOGO%20MIRAKA%20%36%20CO%20PLAIN%20TEXT.png"
             alt="Miraka & Co."
             style={{ height: '18px', width: 'auto', display: 'block' }}
           />
