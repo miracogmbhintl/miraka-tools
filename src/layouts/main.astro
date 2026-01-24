@@ -1,3 +1,5 @@
+
+
 ---
 import '../../generated/fonts.css';
 import '../site-components/global.css';
@@ -9,7 +11,9 @@ const { pageClass = '' } = Astro.props;
 <html lang="en" class={pageClass}>
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/png" href="/favicon.ico" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Miraka & Co. Tools</title>
@@ -32,3 +36,4 @@ const { pageClass = '' } = Astro.props;
     margin: 0 !important; 
   }
 </style>
+
