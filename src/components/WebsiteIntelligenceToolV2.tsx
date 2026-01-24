@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { ArrowLeft, Download, MessageSquare, CheckCircle2, Loader2, AlertCircle, FileText, ChevronDown, ChevronRight, Info, Search, TrendingUp } from 'lucide-react';
 import { baseUrl } from '../lib/base-url';
-import { generateIntelligencePDF } from '../lib/generateIntelligencePDF';
 import '../styles/global.css';
 
 type AnalysisStep = {
@@ -506,8 +505,9 @@ export default function AnalysisPageV2() {
     setSteps(steps.map(step => ({ ...step, status: 'pending' })));
   };
 
-  const handleDownloadPDF = () => {
+  const handleDownloadPDF = async () => {
     if (!analysisData) return;
+    const { generateIntelligencePDF } = await import('../lib/generateIntelligencePDF');
     generateIntelligencePDF({
       url,
       analysisData
