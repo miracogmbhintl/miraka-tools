@@ -4,10 +4,10 @@ import { ToolCard } from './ToolCard';
 export default function HomePage() {
   const tools = [
     {
-      category: 'AI-powered',
-      headline: 'Website Intelligence',
-      description: 'Structured analysis of business clarity, positioning and conversion logic.',
-      href: '/analysis'
+      category: 'Generators',
+      headline: 'QR Code Generator',
+      description: 'Create custom QR codes for any URL or text. Simple, fast, and reliable generation for print or digital use.',
+      href: '/qr'
     },
     {
       category: 'Color Tools',
@@ -28,10 +28,16 @@ export default function HomePage() {
       href: '/html'
     },
     {
-      category: 'Generators',
-      headline: 'QR Code Generator',
-      description: 'Create custom QR codes for any URL or text. Simple, fast, and reliable generation for print or digital use.',
-      href: '/qr'
+      category: 'AI-powered',
+      headline: 'Website Intelligence',
+      description: 'Structured analysis of business clarity, positioning and conversion logic.',
+      href: '/analysis'
+    },
+    {
+      category: 'Games',
+      headline: 'Tic Tac Toe',
+      description: 'Classic two-player game with scoreboard. Challenge a friend in this timeless strategy game.',
+      href: '/tictactoe'
     }
   ];
 
@@ -51,9 +57,3 @@ export default function HomePage() {
     </div>
   );
 }
-
-
-
-
-
-

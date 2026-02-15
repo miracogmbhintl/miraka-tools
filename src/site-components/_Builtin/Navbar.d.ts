@@ -34,21 +34,22 @@ type NavbarProps = {
     className?: string;
     children?: React.ReactElement<NavbarChildrenType>[] | React.ReactElement<NavbarChildrenType>;
 };
-export declare const NavbarWrapper: React.ForwardRefExoticComponent<NavbarProps & React.RefAttributes<unknown>>;
+export declare const NavbarWrapper: React.ForwardRefExoticComponent<NavbarProps & React.RefAttributes<HTMLElement>>;
 type NavbarContainerProps = TagProps & {
-    toggleOpen: () => void;
-    isOpen: boolean;
+    toggleOpen?: () => void;
+    isOpen?: boolean;
     children: React.ReactNode;
 };
 export declare const NavbarContainer: React.ForwardRefExoticComponent<import("./Basic").ElementProps<keyof HTMLElementTagNameMap> & {
     tag?: React.ElementType;
+    grid?: unknown;
 } & {
     children?: React.ReactNode | undefined;
 } & {
-    toggleOpen: () => void;
-    isOpen: boolean;
+    toggleOpen?: () => void;
+    isOpen?: boolean;
     children: React.ReactNode;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;
 type NavbarBrandProps = LinkProps;
 export declare const NavbarBrand: React.ForwardRefExoticComponent<import("./Basic").ElementProps<"a"> & {
     options?: {
@@ -62,18 +63,16 @@ export declare const NavbarBrand: React.ForwardRefExoticComponent<import("./Basi
 } & {
     children?: React.ReactNode | undefined;
 } & React.RefAttributes<HTMLAnchorElement>>;
-type NavbarMenuProps = React.PropsWithChildren<{
+type NavbarMenuProps = React.PropsWithChildren<React.HTMLAttributes<HTMLElement> & {
     tag?: React.ElementType;
-    className?: string;
     isOpen?: boolean;
 }>;
-export declare const NavbarMenu: React.ForwardRefExoticComponent<{
+export declare const NavbarMenu: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLElement> & {
     tag?: React.ElementType;
-    className?: string;
     isOpen?: boolean;
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;
 export declare const NavbarLink: React.ForwardRefExoticComponent<import("./Basic").ElementProps<"a"> & {
     options?: {
         href: string;
@@ -95,5 +94,5 @@ export declare const NavbarButton: React.ForwardRefExoticComponent<{
     className?: string;
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;
 export {};

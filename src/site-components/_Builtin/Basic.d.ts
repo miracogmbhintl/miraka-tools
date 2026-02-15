@@ -5,9 +5,13 @@ export declare const Block: React.ForwardRefExoticComponent<{
     tag?: React.ElementType;
 } & {
     children?: React.ReactNode | undefined;
-} & React.HTMLAttributes<HTMLOrSVGElement> & React.RefAttributes<unknown>>;
-export declare const Span: React.ForwardRefExoticComponent<React.RefAttributes<HTMLSpanElement>>;
-export declare const Blockquote: React.ForwardRefExoticComponent<React.RefAttributes<HTMLQuoteElement>>;
+} & React.HTMLAttributes<HTMLOrSVGElement> & React.RefAttributes<HTMLElement>>;
+export declare const Span: React.ForwardRefExoticComponent<ElementProps<"span"> & {
+    children?: React.ReactNode | undefined;
+} & React.RefAttributes<HTMLSpanElement>>;
+export declare const Blockquote: React.ForwardRefExoticComponent<ElementProps<"blockquote"> & {
+    children?: React.ReactNode | undefined;
+} & React.RefAttributes<HTMLQuoteElement>>;
 export type LinkProps = Props<'a', {
     options?: {
         href: string;
@@ -35,68 +39,78 @@ export declare const List: React.ForwardRefExoticComponent<ElementProps<"ul"> & 
     unstyled?: boolean;
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;
 export declare const ListItem: React.ForwardRefExoticComponent<ElementProps<"li"> & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLLIElement>>;
 type ImageProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>;
 export declare const Image: React.ForwardRefExoticComponent<Omit<ImageProps, "ref"> & React.RefAttributes<HTMLImageElement>>;
 export declare const Section: React.ForwardRefExoticComponent<ElementProps<"section"> & {
-    tag: React.ElementType;
+    tag?: React.ElementType;
+    grid?: unknown;
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;
 export type TagProps = Props<keyof HTMLElementTagNameMap, {
     tag?: React.ElementType;
+    grid?: unknown;
 }>;
 export declare const Container: React.ForwardRefExoticComponent<ElementProps<keyof HTMLElementTagNameMap> & {
     tag?: React.ElementType;
+    grid?: unknown;
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;
 export declare const BlockContainer: React.ForwardRefExoticComponent<ElementProps<keyof HTMLElementTagNameMap> & {
     tag?: React.ElementType;
+    grid?: unknown;
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;
 export declare const HFlex: React.ForwardRefExoticComponent<ElementProps<keyof HTMLElementTagNameMap> & {
     tag?: React.ElementType;
+    grid?: unknown;
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;
 export declare const VFlex: React.ForwardRefExoticComponent<ElementProps<keyof HTMLElementTagNameMap> & {
     tag?: React.ElementType;
+    grid?: unknown;
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;
 export declare const Layout: React.ForwardRefExoticComponent<ElementProps<keyof HTMLElementTagNameMap> & {
     tag?: React.ElementType;
+    grid?: unknown;
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;
 export declare const Cell: React.ForwardRefExoticComponent<ElementProps<keyof HTMLElementTagNameMap> & {
     tag?: React.ElementType;
+    grid?: unknown;
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;
 export declare const HtmlEmbed: React.ForwardRefExoticComponent<ElementProps<"div"> & {
     tag?: React.ElementType;
     value: string;
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;
 export declare const Grid: React.ForwardRefExoticComponent<ElementProps<keyof HTMLElementTagNameMap> & {
     tag?: React.ElementType;
+    grid?: unknown;
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;
 export declare const Icon: React.ForwardRefExoticComponent<ElementProps<"div"> & {
     widget: {
         icon: string;
+        type?: string;
     };
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLDivElement>>;
 type ColumnProps = Props<'div', {
     tag: React.ElementType;
     columnClasses?: string;
@@ -106,21 +120,25 @@ export declare const Column: React.ForwardRefExoticComponent<ElementProps<"div">
     columnClasses?: string;
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;
 export declare const Row: React.ForwardRefExoticComponent<ElementProps<"div"> & {
     children: React.ReactElement<ColumnProps>[];
     tag: React.ElementType;
     columns: {
         [key: string]: string;
     };
-    value: string;
+    value?: string;
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;
 export declare const DOM: React.ForwardRefExoticComponent<ElementProps<"div"> & {
     tag: string;
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
-export declare const NotSupported: React.ForwardRefExoticComponent<React.RefAttributes<HTMLDivElement>>;
+} & React.RefAttributes<HTMLElement>>;
+export declare const NotSupported: React.ForwardRefExoticComponent<ElementProps<"div"> & {
+    _atom?: string;
+} & {
+    children?: React.ReactNode | undefined;
+} & React.RefAttributes<HTMLDivElement>>;
 export {};

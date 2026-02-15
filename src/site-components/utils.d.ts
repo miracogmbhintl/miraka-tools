@@ -39,7 +39,7 @@ export declare const EASING_FUNCTIONS: {
 };
 export declare const isServer: boolean;
 export declare const useLayoutEffect: typeof React.useLayoutEffect;
-export declare function useResizeObserver(ref: React.RefObject<HTMLElement>, fn: (entry: ResizeObserverEntry) => void, options?: {
+export declare function useResizeObserver(ref: React.RefObject<HTMLElement | null>, fn: (entry: ResizeObserverEntry) => void, options?: {
     onlyWidth?: boolean;
 }): void;
 export declare function isUrl(str: string): boolean;
@@ -61,7 +61,7 @@ export declare const KEY_CODES: {
     TAB: string;
 };
 export declare function dispatchCustomEvent(element: Document | Element, eventName: string): void;
-export declare function useClickOut(ref: React.RefObject<HTMLElement>, action: () => void): void;
+export declare function useClickOut(ref: React.RefObject<HTMLElement | null>, action: () => void): void;
 export declare function extractElement<T extends React.JSXElementConstructor<any>>(elements: React.ReactNode[], type: T): {
     extracted: React.ReactNode;
     tree: React.ReactNode[];

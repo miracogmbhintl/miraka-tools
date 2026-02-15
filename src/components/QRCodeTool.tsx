@@ -1,3 +1,5 @@
+
+
 import { useState, useRef } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { HexColorPicker } from 'react-colorful';
@@ -265,7 +267,7 @@ export default function QRCodeTool() {
             right: 12px;
             top: 12px;
             z-index: 1000;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter Tight', sans-serif;
             font-size: 16px;
             font-weight: 700;
             color: #1A1A1A;
@@ -293,6 +295,25 @@ export default function QRCodeTool() {
           }
         }
       `}</style>
+      <style>{`
+            @media print {
+              body * {
+                visibility: hidden;
+              }
+              #qr-print-area,
+              #qr-print-area * {
+                visibility: visible;
+              }
+              #qr-print-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                background: white;
+                padding: 40px;
+                font-family: 'Inter Tight', sans-serif;
+              }
+            }
+          `}</style>
       
       <div className="qr-tool-container">
         {/* Back Button */}
@@ -756,6 +777,8 @@ export default function QRCodeTool() {
     </>
   );
 }
+
+
 
 
 

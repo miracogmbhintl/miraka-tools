@@ -35,10 +35,16 @@ function useSwipe({ onSwipeLeft, onSwipeRight, config, }) {
     const [touchStart, setTouchStart] = React.useState(0);
     const [touchEnd, setTouchEnd] = React.useState(0);
     const handleTouchStart = (e) => {
-        setTouchStart(e.touches[0].clientX);
+        const touch = e.touches[0];
+        if (!touch)
+            return;
+        setTouchStart(touch.clientX);
     };
     const handleTouchMove = (e) => {
-        setTouchEnd(e.touches[0].clientX);
+        const touch = e.touches[0];
+        if (!touch)
+            return;
+        setTouchEnd(touch.clientX);
     };
     const handleTouchEnd = () => {
         if (config?.disableSwipe)
@@ -128,7 +134,8 @@ export const SliderMask = React.forwardRef(function SliderMask({ className = '',
             const childrenList = React.Children.toArray(_children).filter((child) => React.isValidElement(child));
             if (childrenList.length === 1 &&
                 childrenList[0]?.type === React.Fragment) {
-                return extractNonFragmentChildren(childrenList[0].props.children);
+                const fragmentProps = childrenList[0].props;
+                return extractNonFragmentChildren(fragmentProps.children);
             }
             else {
                 return childrenList;
@@ -153,7 +160,7 @@ export const SliderMask = React.forwardRef(function SliderMask({ className = '',
         }),
         React.createElement("div", { "aria-live": isHovered ? 'polite' : 'off', "aria-atomic": "true", className: "w-slider-aria-label" })));
 });
-export const SliderSlide = React.forwardRef(function SliderSlide({ tag = 'div', className = '', style = {}, index, ...props }, ref) {
+export const SliderSlide = React.forwardRef(function SliderSlide({ tag = 'div', className = '', style = {}, index = 0, ...props }, ref) {
     const { animation, duration, easing, slide: { current, previous }, slideAmount, } = React.useContext(SliderContext);
     const { restartEngine } = React.useContext(IXContext);
     React.useEffect(() => {

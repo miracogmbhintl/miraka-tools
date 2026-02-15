@@ -1,9 +1,12 @@
+
 import type { APIRoute } from 'astro';
 import { parse } from 'node-html-parser';
 
 // Types for our analysis
 interface WebsiteAnalysis {
   executiveSnapshot: {
+    businessName: string;
+    industry: string;
     businessType: string;
     marketScope: string;
     primaryGoal: string;
@@ -21,6 +24,7 @@ interface WebsiteAnalysis {
     structuralWeaknesses: string;
   };
   strategicSignals: string[];
+  strengthsHighlights: string[]; // NEW: What's working well
   nextMoves: Array<{
     title: string;
     priority: 'high' | 'medium' | 'low';
@@ -139,15 +143,32 @@ Technical Indicators:
 
 Provide a comprehensive business intelligence analysis in the following JSON format (return ONLY valid JSON, no markdown):
 
+IMPORTANT CATEGORIZATION GUIDELINES:
+- Business Name: Extract the actual company/brand name from title, headings, or branding elements
+- Industry: Identify the specific industry sector (e.g., "Management Consulting", "Web Design", "E-commerce", "Healthcare", "Financial Services")
+- Business Type: Use ONE of these standardized categories based on the business model:
+  * "B2B Service Provider" - Professional services targeting businesses
+  * "B2C Service Provider" - Services targeting individual consumers
+  * "E-commerce" - Online retail/product sales
+  * "SaaS Platform" - Software as a service
+  * "Agency" - Marketing, design, or creative agency
+  * "Consultancy" - Strategy, management, or specialized consulting
+  * "Marketplace" - Platform connecting buyers and sellers
+  * "Educational" - Courses, training, or educational content
+  * "Non-profit" - Charitable or cause-driven organization
+  * "Local Business" - Physical location-based service (restaurant, retail, etc.)
+
 {
   "executiveSnapshot": {
-    "businessType": "Brief business type (e.g., 'B2B Service', 'E-commerce', 'SaaS')",
-    "marketScope": "Market scope (e.g., 'Regional', 'National', 'Global')",
-    "primaryGoal": "Primary goal (e.g., 'Lead Gen', 'E-commerce', 'Brand Awareness')",
+    "businessName": "The actual business/company name",
+    "industry": "Specific industry sector (e.g., 'Management Consulting', 'Digital Marketing')",
+    "businessType": "Use ONE standardized category from the list above",
+    "marketScope": "Market scope (e.g., 'Regional', 'National', 'Global', 'Local')",
+    "primaryGoal": "Primary goal (e.g., 'Lead Generation', 'E-commerce Sales', 'Brand Awareness', 'User Acquisition')",
     "clarityScore": 75
   },
   "coreVariables": {
-    "businessType": "Detailed business type description",
+    "businessType": "Detailed business type description with specifics",
     "targetAudience": "Target audience description",
     "offerStructure": "Offer structure description",
     "pricingNote": "Optional pricing note if relevant",
@@ -162,6 +183,11 @@ Provide a comprehensive business intelligence analysis in the following JSON for
     "Signal 2 - clear, actionable observation",
     "Signal 3 - clear, actionable observation",
     "Signal 4 - clear, actionable observation"
+  ],
+  "strengthsHighlights": [
+    "Positive observation 1 - what's working well",
+    "Positive observation 2 - effective elements to maintain",
+    "Positive observation 3 - strong aspects of the site"
   ],
   "nextMoves": [
     {
@@ -312,10 +338,23 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
     console.log('[API] Analysis complete, returning results');
     
-    // Return analysis
+    // Return analysis WITH raw website data
     return new Response(JSON.stringify({
       success: true,
       data: analysis,
+      websiteData: {
+        url: websiteData.url,
+        title: websiteData.title,
+        description: websiteData.description,
+        headings: websiteData.headings,
+        paragraphs: websiteData.paragraphs,
+        links: websiteData.links,
+        images: websiteData.images,
+        hasContactForm: websiteData.hasContactForm,
+        hasPricing: websiteData.hasPricing,
+        hasTestimonials: websiteData.hasTestimonials,
+        hasBlog: websiteData.hasBlog
+      },
       metadata: {
         analyzedUrl: validUrl.toString(),
         timestamp: new Date().toISOString()
@@ -336,4 +375,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
     });
   }
 };
+
+
+
+
+
 

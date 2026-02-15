@@ -27,8 +27,8 @@ export const NavbarContext = React.createContext({
     noScroll: false,
     toggleOpen: () => undefined,
     navbarMounted: false,
-    menu: undefined,
-    root: undefined,
+    menu: { current: null },
+    root: { current: null },
     setFocusedLink: () => undefined,
 });
 function getAnimationKeyframes({ axis = 'Y', start, end, }) {

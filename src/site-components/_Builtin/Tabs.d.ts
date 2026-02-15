@@ -15,12 +15,14 @@ type TabsMenuProps = {
     className?: string;
     children?: React.ReactElement<TabsLinkProps>[];
 };
-export declare const TabsMenu: React.ForwardRefExoticComponent<TabsMenuProps & React.RefAttributes<unknown>>;
+export declare const TabsMenu: React.ForwardRefExoticComponent<TabsMenuProps & React.RefAttributes<HTMLElement>>;
 type TabsLinkProps = Props<'a', {
     'data-w-tab': string;
+    block?: string;
 }>;
 export declare const TabsLink: React.ForwardRefExoticComponent<import("./Basic").ElementProps<"a"> & {
     'data-w-tab': string;
+    block?: string;
 } & {
     children?: React.ReactNode | undefined;
 } & React.RefAttributes<HTMLAnchorElement>>;
@@ -29,7 +31,7 @@ type TabsContentProps = {
     className?: string;
     children?: React.ReactElement<TabsPaneProps>[] | React.ReactElement<TabsPaneProps>;
 };
-export declare const TabsContent: React.ForwardRefExoticComponent<TabsContentProps & React.RefAttributes<unknown>>;
+export declare const TabsContent: React.ForwardRefExoticComponent<TabsContentProps & React.RefAttributes<HTMLElement>>;
 type TabsPaneProps = React.PropsWithChildren<{
     tag?: React.ElementType;
     className?: string;
@@ -41,5 +43,5 @@ export declare const TabsPane: React.ForwardRefExoticComponent<{
     'data-w-tab': string;
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;
 export {};

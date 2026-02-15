@@ -48,13 +48,13 @@ type SliderSlideProps = React.PropsWithChildren<{
     style?: React.CSSProperties;
     tag?: string;
     className?: string;
-    index: number;
+    index?: number;
 }>;
 export declare const SliderSlide: React.ForwardRefExoticComponent<{
     style?: React.CSSProperties;
     tag?: string;
     className?: string;
-    index: number;
+    index?: number;
 } & {
     children?: React.ReactNode | undefined;
 } & React.RefAttributes<unknown>>;

@@ -129,7 +129,7 @@ const HIDE_DEFAULT_INPUT_STYLES = {
 const CHECKED_CLASS = 'w--redirected-checked';
 const FOCUSED_CLASS = 'w--redirected-focus';
 const FOCUSED_VISIBLE_CLASS = 'w--redirected-focus-visible';
-export const FormBooleanInput = React.forwardRef(function FormBooleanInput({ className = '', checked = false, type = 'checkbox', inputType, customClassName, ...props }, ref) {
+export const FormBooleanInput = React.forwardRef(function FormBooleanInput({ className = '', checked = false, type = 'checkbox', inputType, customClassName, form: _form, ...props }, ref) {
     const [isChecked, setIsChecked] = React.useState(checked);
     const [isFocused, setIsFocused] = React.useState(false);
     const [isFocusedVisible, setIsFocusedVisible] = React.useState(false);
@@ -304,7 +304,7 @@ export const FormFileUploadFileName = React.forwardRef(function FormFileUploadFi
         className: className + ' w-file-upload-file-name',
         ...props,
         ref,
-    }, files && files[0].name);
+    }, files?.[0]?.name ?? '');
 });
 export const FormFileUploadRemoveLink = React.forwardRef(function FormFileUploadRemoveLink({ className = '', ...props }, ref) {
     const { setFiles } = React.useContext(FileUploadContext);

@@ -14,7 +14,17 @@ function buildTitle(title, tooltip) {
     }
     return markerTitle;
 }
-export const MapWidget = React.forwardRef(function MapWidget({ apiKey = '', mapStyle = 'roadmap', zoom = 12, latlng = '51.511214,-0.119824', tooltip = '', title = '', enableScroll = true, enableTouch = true, className = '', ...props }, ref) {
+function parseLatLng(latlng) {
+    const coords = latlng.split(',');
+    const lat = coords[0] ? parseFloat(coords[0]) : undefined;
+    const lng = coords[1] ? parseFloat(coords[1]) : undefined;
+    if (lat !== undefined && lng !== undefined && !isNaN(lat) && !isNaN(lng)) {
+        return { lat, lng };
+    }
+    return undefined;
+}
+const DEFAULT_LATLNG = '51.511214,-0.119824';
+export const MapWidget = React.forwardRef(function MapWidget({ apiKey = '', mapStyle = 'roadmap', zoom = 12, latlng = DEFAULT_LATLNG, tooltip = '', title = '', enableScroll = true, enableTouch = true, className = '', ...props }, ref) {
     const mapRef = useRef(null);
     React.useImperativeHandle(ref, () => mapRef.current);
     useEffect(() => {
@@ -24,8 +34,7 @@ export const MapWidget = React.forwardRef(function MapWidget({ apiKey = '', mapS
             if (!window?.google?.maps)
                 return;
             const { Map, Marker, InfoWindow } = window.google.maps;
-            const coords = latlng.split(',');
-            const center = { lat: parseFloat(coords[0]), lng: parseFloat(coords[1]) };
+            const center = parseLatLng(latlng) ?? parseLatLng(DEFAULT_LATLNG);
             const map = new Map(mapRef.current, {
                 zoom,
                 center,

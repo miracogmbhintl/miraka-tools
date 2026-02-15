@@ -10,7 +10,7 @@ export declare const DropdownWrapper: React.ForwardRefExoticComponent<{
 } & {
     children?: React.ReactNode | undefined;
 } & {
-    children: React.ReactElement<DropdownToggleProps | DropdownListProps>;
+    children: React.ReactElement<DropdownToggleProps | DropdownListProps> | React.ReactElement<DropdownToggleProps | DropdownListProps>[];
     delay: number;
     hover: boolean;
 } & React.RefAttributes<unknown>>;

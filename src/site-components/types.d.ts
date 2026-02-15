@@ -21,10 +21,10 @@ export declare namespace Asset {
 }
 export declare namespace Embed {
     type Video = {
-        height: number;
-        width: number;
-        title: string;
-        url: string;
+        height?: number;
+        width?: number;
+        title?: string;
+        url?: string;
     };
 }
 export declare namespace Visibility {

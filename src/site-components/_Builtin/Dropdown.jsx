@@ -8,7 +8,7 @@ function getLinksList(root) {
     return root.querySelectorAll('.w-dropdown-list .w-dropdown-link');
 }
 const DropdownContext = React.createContext({
-    root: undefined,
+    root: { current: null },
     isOpen: false,
     toggleOpen: () => undefined,
     setFocusedLink: () => undefined,
@@ -22,7 +22,7 @@ export const DropdownWrapper = React.forwardRef(function DropdownWrapper({ delay
     const root = React.useRef(null);
     const [{ isOpen }, setIsOpen] = React.useState(INITIAL_DROPDOWN_STATE);
     const [focusedLink, setFocusedLink] = React.useState(-1);
-    const closeTimeoutRef = React.useRef();
+    const closeTimeoutRef = React.useRef(undefined);
     React.useImperativeHandle(ref, () => root.current);
     React.useEffect(() => {
         return () => {

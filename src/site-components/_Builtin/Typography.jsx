@@ -22,7 +22,7 @@ export const Strong = React.forwardRef(function Strong(props, ref) {
     });
 });
 export const Figure = React.forwardRef(function Figure({ className = '', figure, ...props }, ref) {
-    const { type, align } = figure;
+    const { type, align } = figure ?? {};
     if (align) {
         className += `w-richtext-align-${align} `;
     }

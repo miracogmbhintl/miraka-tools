@@ -85,6 +85,8 @@ export function useResizeObserver(ref, fn, options) {
     const observer = React.useMemo(() => isServer
         ? null
         : new ResizeObserver(([entry]) => {
+            if (!entry)
+                return;
             if (options?.onlyWidth) {
                 if (prevWidth !== entry.contentRect.width) {
                     setPrevWidth(() => {
@@ -101,7 +103,7 @@ export function useResizeObserver(ref, fn, options) {
         const target = ref.current;
         if (!target)
             return;
-        observer?.observe(ref.current);
+        observer?.observe(target);
         return () => observer?.unobserve(target);
     }, [ref, observer]);
 }
@@ -193,8 +195,9 @@ export function extractElement(elements, type) {
                 extracted = element;
                 return null;
             }
-            const children = removeElementByType(React.Children.toArray(element.props.children));
-            return React.cloneElement(element, element.props, ...children);
+            const elementProps = element.props;
+            const children = removeElementByType(React.Children.toArray(elementProps.children));
+            return React.cloneElement(element, elementProps, ...children);
         });
     }
     const tree = removeElementByType(elements);

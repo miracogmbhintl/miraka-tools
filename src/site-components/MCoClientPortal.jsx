@@ -86,24 +86,6 @@ export function MCoClientPortal(
                                 width="auto"
                                 height="auto"
                                 alt=""
-                                src="https://cdn.prod.website-files.com/68dc2b9c31cb83ac9f84a1af/69078d1e6f598345e689af64_21dcd173a43c967c74662620cbeca088_element-01.svg" /></_Builtin.Block></_Builtin.Block><_Builtin.Block className="wbs-section-6 app-news" tag="div"><_Builtin.Block className="wbs-container-6" tag="div"><_Builtin.Block className="wbs-cta-component" tag="div"><_Builtin.Block className="wbs-cta-2" tag="div"><_Builtin.Heading className="wbs-heading-h5-4" tag="h1"><_Builtin.Span className="text-span-56">{"M&CO"}</_Builtin.Span><_Builtin.Span className="text-span-57">{"CLIENT PORTAL"}</_Builtin.Span><br /><br /></_Builtin.Heading><_Builtin.Heading className="wbs-heading-h5-4" tag="h1"><_Builtin.Span className="text-span-46">{"Bald erhältlich."}</_Builtin.Span><br /><_Builtin.Span className="text-span-47">{"Bleiben Sie informiert über den Launch."}</_Builtin.Span></_Builtin.Heading><_Builtin.Block className="wbs-spacing-45" tag="div" /><_Builtin.FormWrapper><_Builtin.FormForm
-                                            name="email-form-2"
-                                            data-name="Email Form 2"
-                                            method="get"
-                                            id="email-form-2"><_Builtin.Block className="wbs-form-group-alert" tag="div"><_Builtin.FormTextInput
-                                                    className="wbs-form-subscribe-2-input"
-                                                    autoFocus={false}
-                                                    maxLength={256}
-                                                    name="Email-App-Release"
-                                                    data-name="Email App Release"
-                                                    placeholder="Ihre email adresse"
-                                                    type="email"
-                                                    disabled={false}
-                                                    required={true}
-                                                    id="Email-App-Release" /><_Builtin.FormButton
-                                                    className="wbs-button-black-2"
-                                                    type="submit"
-                                                    value="Benchrichtigen"
-                                                    data-wait="Bitte warten..." /></_Builtin.Block></_Builtin.FormForm><_Builtin.FormSuccessMessage className="wbs-success-message"><_Builtin.Block tag="div">{"Thank you! Your submission has been received!"}</_Builtin.Block></_Builtin.FormSuccessMessage><_Builtin.FormErrorMessage className="wbs-error-message"><_Builtin.Block tag="div">{"Oops! Something went wrong while submitting the form."}</_Builtin.Block></_Builtin.FormErrorMessage></_Builtin.FormWrapper><_Builtin.Paragraph className="paragraph-6">{"Mit Ihrer E-Mail bestätigen Sie den Erhalt einmaliger Benachrichtigungen zum Portal Launch. Kein Spam. Abmeldung jederzeit per Link."}</_Builtin.Paragraph></_Builtin.Block></_Builtin.Block></_Builtin.Block></_Builtin.Block></_Builtin.Block></_Builtin.Block></_Component>
+                                src="https://cdn.prod.website-files.com/68dc2b9c31cb83ac9f84a1af/69078d1e6f598345e689af64_21dcd173a43c967c74662620cbeca088_element-01.svg" /></_Builtin.Block></_Builtin.Block></_Builtin.Block></_Builtin.Block></_Component>
     );
 }

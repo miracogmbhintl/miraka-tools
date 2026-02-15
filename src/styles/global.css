@@ -48,10 +48,14 @@
   --button-font: var(--button-font);
 }
 
+/* ===============================
+   GLOBAL FONT OVERRIDE
+   Replace all Montserrat with Inter Tight
+   =============================== */
 :root {
-  --body-font: var(--_apps---typography--body-font);
-  --heading-font: var(--_apps---typography--heading-font);
-  --button-font: var(--_apps---typography--button-font);
+  --body-font: 'Inter Tight', sans-serif;
+  --heading-font: 'Inter Tight', sans-serif;
+  --button-font: 'Inter Tight', sans-serif;
   --radius: var(--_apps---sizes--radius);
   --background: var(--_apps---colors--background);
   --foreground: var(--_apps---colors--foreground);
@@ -203,3 +207,4 @@
   background-color: var(--primary) !important;
   opacity: 0.9;
 }
+

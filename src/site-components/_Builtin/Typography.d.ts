@@ -3,24 +3,31 @@ export declare const Heading: React.ForwardRefExoticComponent<{
     tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 } & {
     children?: React.ReactNode | undefined;
-} & React.HTMLAttributes<HTMLHeadingElement> & React.RefAttributes<unknown>>;
+} & React.HTMLAttributes<HTMLHeadingElement> & React.RefAttributes<HTMLHeadingElement>>;
 export declare const Paragraph: React.ForwardRefExoticComponent<import("./Basic").ElementProps<"p"> & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLParagraphElement>>;
 export declare const Emphasized: React.ForwardRefExoticComponent<import("./Basic").ElementProps<"em"> & {
     children?: React.ReactNode | undefined;
 } & React.RefAttributes<HTMLElement>>;
 export declare const Strong: React.ForwardRefExoticComponent<import("./Basic").ElementProps<"strong"> & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;
 export declare const Figure: React.ForwardRefExoticComponent<import("./Basic").ElementProps<"figure"> & {
     children?: React.ReactNode | undefined;
 } & {
-    figure: {
-        align: string;
-        type: string;
+    figure?: {
+        align?: string;
+        type?: string;
+        url?: string;
+        width?: number;
+        height?: number;
+        dimensions?: string;
+        maxHeight?: string;
+        maxWidth?: string;
+        pageUrl?: string;
     };
-} & React.RefAttributes<HTMLImageElement>>;
+} & React.RefAttributes<HTMLElement>>;
 export declare const Figcaption: React.ForwardRefExoticComponent<import("./Basic").ElementProps<"figcaption"> & {
     children?: React.ReactNode | undefined;
 } & React.RefAttributes<HTMLElement>>;
@@ -34,4 +41,4 @@ export declare const RichText: React.ForwardRefExoticComponent<import("./Basic")
     tag?: React.ElementType;
 } & {
     children?: React.ReactNode | undefined;
-} & React.RefAttributes<unknown>>;
+} & React.RefAttributes<HTMLElement>>;

@@ -172,7 +172,7 @@ export default function ColorPickerTool() {
             right: 12px;
             top: 12px;
             z-index: 1000;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter Tight', sans-serif;
             font-size: 16px;
             font-weight: 700;
             color: #1A1A1A;
@@ -199,6 +199,25 @@ export default function ColorPickerTool() {
             position: relative;
             height: auto;
             overflow: visible;
+          }
+        }
+      `}</style>
+      <style>{`
+        @media print {
+          body * {
+            visibility: hidden;
+          }
+          #color-print-area,
+          #color-print-area * {
+            visibility: visible;
+          }
+          #color-print-area {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: white;
+            padding: 40px;
+            font-family: 'Inter Tight', sans-serif;
           }
         }
       `}</style>
@@ -493,4 +512,6 @@ export default function ColorPickerTool() {
     </>
   );
 }
+
+
 

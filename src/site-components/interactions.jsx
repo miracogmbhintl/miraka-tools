@@ -40,8 +40,8 @@ const enhanceIXData = (data, styles) => {
 export const IXContext = React.createContext({ initEngine: null, restartEngine: null });
 export const InteractionsProvider = ({ children, createEngine, }) => {
     const ixData = React.useRef({});
-    const ixStyles = React.useRef();
-    const ixEngine = React.useRef();
+    const ixStyles = React.useRef(undefined);
+    const ixEngine = React.useRef(undefined);
     const debouncedInit = React.useRef(debounce((data, styles) => {
         if (!ixEngine.current)
             ixEngine.current = createEngine();
@@ -64,10 +64,13 @@ export const InteractionsProvider = ({ children, createEngine, }) => {
         if (styles) {
             ixStyles.current = ixStyles.current ?? {};
             for (const s in styles) {
-                if (!ixStyles.current[s]?.includes(styles[s])) {
+                const styleValue = styles[s];
+                if (styleValue === undefined)
+                    continue;
+                if (!ixStyles.current[s]?.includes(styleValue)) {
                     const currentStyle = ixStyles.current[s];
                     ixStyles.current[s] =
-                        CSS.escape(styles[s]) + (currentStyle ? ` ${currentStyle}` : '');
+                        CSS.escape(styleValue) + (currentStyle ? ` ${currentStyle}` : '');
                 }
             }
         }

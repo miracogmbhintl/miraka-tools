@@ -47,13 +47,13 @@ export const Image = React.forwardRef(function Image({ alt, ...props }, ref) {
     const { renderImage: UserImage } = React.useContext(DevLinkContext);
     return UserImage ? (React.createElement(UserImage, { alt: alt || '', ...props, ref: ref })) : (React.createElement("img", { alt: alt || '', ...props, ref: ref }));
 });
-export const Section = React.forwardRef(function Section({ tag = 'section', ...props }, ref) {
+export const Section = React.forwardRef(function Section({ tag = 'section', grid: _grid, ...props }, ref) {
     return React.createElement(tag, {
         ...props,
         ref,
     });
 });
-export const Container = React.forwardRef(function Container({ tag = 'div', className = '', ...props }, ref) {
+export const Container = React.forwardRef(function Container({ tag = 'div', className = '', grid: _grid, ...props }, ref) {
     return React.createElement(tag, {
         className: className + ' w-container',
         ref,
@@ -67,28 +67,28 @@ export const BlockContainer = React.forwardRef(function BlockContainer({ tag = '
         ref,
     });
 });
-export const HFlex = React.forwardRef(function HFlex({ tag = 'div', className = '', ...props }, ref) {
+export const HFlex = React.forwardRef(function HFlex({ tag = 'div', className = '', grid: _grid, ...props }, ref) {
     return React.createElement(tag, {
         className: className + ' w-layout-hflex',
         ...props,
         ref,
     });
 });
-export const VFlex = React.forwardRef(function VFlex({ tag = 'div', className = '', ...props }, ref) {
+export const VFlex = React.forwardRef(function VFlex({ tag = 'div', className = '', grid: _grid, ...props }, ref) {
     return React.createElement(tag, {
         className: className + ' w-layout-vflex',
         ...props,
         ref,
     });
 });
-export const Layout = React.forwardRef(function Layout({ tag = 'div', className = '', ...props }, ref) {
+export const Layout = React.forwardRef(function Layout({ tag = 'div', className = '', grid: _grid, ...props }, ref) {
     return React.createElement(tag, {
         className: className + ' w-layout-layout wf-layout-layout',
         ...props,
         ref,
     });
 });
-export const Cell = React.forwardRef(function Cell({ tag = 'div', className = '', ...props }, ref) {
+export const Cell = React.forwardRef(function Cell({ tag = 'div', className = '', grid: _grid, ...props }, ref) {
     return React.createElement(tag, {
         className: className + ' w-layout-cell',
         ...props,
@@ -103,7 +103,7 @@ export const HtmlEmbed = React.forwardRef(function HtmlEmbed({ tag = 'div', clas
         ref,
     });
 });
-export const Grid = React.forwardRef(function Grid({ tag = 'div', className = '', ...props }, ref) {
+export const Grid = React.forwardRef(function Grid({ tag = 'div', className = '', grid: _grid, ...props }, ref) {
     return React.createElement(tag, {
         className: className + ' w-layout-grid',
         ...props,
