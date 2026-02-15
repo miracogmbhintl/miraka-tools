@@ -38,6 +38,12 @@ export default function HomePage() {
       headline: 'Tic Tac Toe',
       description: 'Classic two-player game with scoreboard. Challenge a friend in this timeless strategy game.',
       href: '/tictactoe'
+    },
+    {
+      category: 'Games',
+      headline: 'Snake',
+      description: 'Classic snake game with smooth controls. Eat food, grow longer, and avoid hitting yourself or the walls.',
+      href: '/snake'
     }
   ];
 

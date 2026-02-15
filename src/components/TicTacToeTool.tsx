@@ -85,31 +85,6 @@ export default function TicTacToeTool() {
 
   const winningLine = getWinningLine();
 
-  // Calculate line position for winning animation
-  const getLineStyles = () => {
-    if (winningLine.length === 0) return null;
-    
-    const [a, b, c] = winningLine;
-    
-    // Horizontal lines
-    if (a === 0 && b === 1 && c === 2) return { top: '16.66%', left: '0%', width: '100%', height: '2px', transform: 'translateY(-50%)' };
-    if (a === 3 && b === 4 && c === 5) return { top: '50%', left: '0%', width: '100%', height: '2px', transform: 'translateY(-50%)' };
-    if (a === 6 && b === 7 && c === 8) return { top: '83.33%', left: '0%', width: '100%', height: '2px', transform: 'translateY(-50%)' };
-    
-    // Vertical lines
-    if (a === 0 && b === 3 && c === 6) return { left: '16.66%', top: '0%', width: '2px', height: '100%', transform: 'translateX(-50%)' };
-    if (a === 1 && b === 4 && c === 7) return { left: '50%', top: '0%', width: '2px', height: '100%', transform: 'translateX(-50%)' };
-    if (a === 2 && b === 5 && c === 8) return { left: '83.33%', top: '0%', width: '2px', height: '100%', transform: 'translateX(-50%)' };
-    
-    // Diagonal lines
-    if (a === 0 && b === 4 && c === 8) return { left: '50%', top: '50%', width: '141%', height: '2px', transform: 'translate(-50%, -50%) rotate(45deg)' };
-    if (a === 2 && b === 4 && c === 6) return { left: '50%', top: '50%', width: '141%', height: '2px', transform: 'translate(-50%, -50%) rotate(-45deg)' };
-    
-    return null;
-  };
-
-  const lineStyles = getLineStyles();
-
   // Color definitions
   const tiffanyBlue = '#81D8D0'; // Tiffany Blue for X
   const hermesOrange = '#FF7F32'; // Hermès Orange for O
@@ -172,62 +147,20 @@ export default function TicTacToeTool() {
           gap: 16px;
         }
 
-        @keyframes winLineAnimation {
-          from {
-            transform: translate(-50%, -50%) scaleX(0);
-          }
-          to {
-            transform: translate(-50%, -50%) scaleX(1);
-          }
-        }
-
-        @keyframes winLineDiagonalAnimation {
-          from {
-            width: 0;
-          }
-          to {
-            width: 141%;
-          }
-        }
-
-        @keyframes cellWhiteFlash {
-          0% {
-            background: #FFFFFF;
-          }
-          50% {
-            background: #FFFFFF;
-          }
-          100% {
-            background: #FFFFFF;
-          }
-        }
-
         @keyframes winnerCharacterPop {
           0% {
             transform: scale(1);
           }
           50% {
-            transform: scale(1.3);
+            transform: scale(1.4);
           }
           100% {
             transform: scale(1);
           }
         }
 
-        .win-line {
-          position: absolute;
-          background: #1A1A1A;
-          z-index: 10;
-          animation: winLineAnimation 0.5s ease-out forwards;
-          transform-origin: center;
-        }
-
-        .win-line.diagonal {
-          animation: winLineDiagonalAnimation 0.5s ease-out forwards;
-        }
-
         .winning-cell {
-          animation: cellWhiteFlash 0.5s ease-out forwards, winnerCharacterPop 0.6s ease-out 0.3s;
+          animation: winnerCharacterPop 0.6s ease-out;
         }
         
         @media (max-width: 768px) {
@@ -276,6 +209,7 @@ export default function TicTacToeTool() {
             overflow: visible;
             flex-shrink: 0;
             gap: 10px;
+            order: 3;
           }
           
           .tictactoe-right-column {
@@ -285,6 +219,12 @@ export default function TicTacToeTool() {
             flex: 1;
             min-height: 0;
             display: flex;
+            order: 2;
+          }
+
+          /* Player indicators appear first on mobile */
+          .mobile-player-indicators {
+            order: 1 !important;
           }
 
           /* Mobile-optimized scoreboard */
@@ -474,37 +414,6 @@ export default function TicTacToeTool() {
           {/* LEFT COLUMN - Scoreboard & Buttons */}
           <div className="tictactoe-left-column">
             
-            {/* Scoreboard */}
-            <div className="mobile-scoreboard" style={{
-              background: '#FFFFFF',
-              borderRadius: '14px',
-              padding: '20px',
-              border: '1px solid #E5E7EB',
-              boxShadow: '0 1px 2px rgba(0, 0, 0, 0.04)'
-            }}>
-              <div className="mobile-scoreboard-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginBottom: '16px' }}>
-                <Trophy size={18} strokeWidth={2.5} style={{ color: '#F37021' }} />
-                <h2 style={{ fontSize: '18px', fontWeight: 700, margin: 0, color: '#1A1A1A' }}>Scoreboard</h2>
-              </div>
-              <div className="mobile-score-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px', textAlign: 'center' }}>
-                <div>
-                  <div className="mobile-score-label" style={{ fontSize: '18px', fontWeight: 700, color: tiffanyBlue, marginBottom: '4px' }}>X</div>
-                  <div className="mobile-score-number" style={{ fontSize: '32px', fontWeight: 700, color: '#1A1A1A', marginBottom: '4px' }}>{scores.X}</div>
-                  <div className="mobile-score-text" style={{ fontSize: '12px', color: '#6B7280', fontWeight: 600 }}>Wins</div>
-                </div>
-                <div>
-                  <div className="mobile-score-label" style={{ fontSize: '18px', fontWeight: 700, color: '#6B7280', marginBottom: '4px' }}>Draw</div>
-                  <div className="mobile-score-number" style={{ fontSize: '32px', fontWeight: 700, color: '#1A1A1A', marginBottom: '4px' }}>{scores.draws}</div>
-                  <div className="mobile-score-text" style={{ fontSize: '12px', color: '#6B7280', fontWeight: 600 }}>Games</div>
-                </div>
-                <div>
-                  <div className="mobile-score-label" style={{ fontSize: '18px', fontWeight: 700, color: hermesOrange, marginBottom: '4px' }}>O</div>
-                  <div className="mobile-score-number" style={{ fontSize: '32px', fontWeight: 700, color: '#1A1A1A', marginBottom: '4px' }}>{scores.O}</div>
-                  <div className="mobile-score-text" style={{ fontSize: '12px', color: '#6B7280', fontWeight: 600 }}>Wins</div>
-                </div>
-              </div>
-            </div>
-
             {/* Current Player Indicators - X and O side by side */}
             <div className="mobile-player-indicators" style={{
               display: 'grid',
@@ -572,6 +481,37 @@ export default function TicTacToeTool() {
                   letterSpacing: '0.5px'
                 }}>
                   {winner === 'O' ? 'Winner!' : 'Player'}
+                </div>
+              </div>
+            </div>
+
+            {/* Scoreboard */}
+            <div className="mobile-scoreboard" style={{
+              background: '#FFFFFF',
+              borderRadius: '14px',
+              padding: '20px',
+              border: '1px solid #E5E7EB',
+              boxShadow: '0 1px 2px rgba(0, 0, 0, 0.04)'
+            }}>
+              <div className="mobile-scoreboard-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginBottom: '16px' }}>
+                <Trophy size={18} strokeWidth={2.5} style={{ color: '#F37021' }} />
+                <h2 style={{ fontSize: '18px', fontWeight: 700, margin: 0, color: '#1A1A1A' }}>Scoreboard</h2>
+              </div>
+              <div className="mobile-score-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px', textAlign: 'center' }}>
+                <div>
+                  <div className="mobile-score-label" style={{ fontSize: '18px', fontWeight: 700, color: tiffanyBlue, marginBottom: '4px' }}>X</div>
+                  <div className="mobile-score-number" style={{ fontSize: '32px', fontWeight: 700, color: '#1A1A1A', marginBottom: '4px' }}>{scores.X}</div>
+                  <div className="mobile-score-text" style={{ fontSize: '12px', color: '#6B7280', fontWeight: 600 }}>Wins</div>
+                </div>
+                <div>
+                  <div className="mobile-score-label" style={{ fontSize: '18px', fontWeight: 700, color: '#6B7280', marginBottom: '4px' }}>Draw</div>
+                  <div className="mobile-score-number" style={{ fontSize: '32px', fontWeight: 700, color: '#1A1A1A', marginBottom: '4px' }}>{scores.draws}</div>
+                  <div className="mobile-score-text" style={{ fontSize: '12px', color: '#6B7280', fontWeight: 600 }}>Games</div>
+                </div>
+                <div>
+                  <div className="mobile-score-label" style={{ fontSize: '18px', fontWeight: 700, color: hermesOrange, marginBottom: '4px' }}>O</div>
+                  <div className="mobile-score-number" style={{ fontSize: '32px', fontWeight: 700, color: '#1A1A1A', marginBottom: '4px' }}>{scores.O}</div>
+                  <div className="mobile-score-text" style={{ fontSize: '12px', color: '#6B7280', fontWeight: 600 }}>Wins</div>
                 </div>
               </div>
             </div>
@@ -688,14 +628,6 @@ export default function TicTacToeTool() {
                 gap: 0,
                 position: 'relative'
               }}>
-                {/* Winning Line Animation */}
-                {showWinAnimation && lineStyles && (
-                  <div 
-                    className={`win-line ${winningLine[0] === 0 && winningLine[2] === 8 || winningLine[0] === 2 && winningLine[2] === 6 ? 'diagonal' : ''}`}
-                    style={lineStyles}
-                  />
-                )}
-
                 {board.map((cell, index) => {
                   const row = Math.floor(index / 3);
                   const col = index % 3;
@@ -736,9 +668,7 @@ export default function TicTacToeTool() {
                         }
                       }}
                       onTouchEnd={(e) => {
-                        if (!isWinningCell || !showWinAnimation) {
-                          e.currentTarget.style.background = '#FFFFFF';
-                        }
+                        e.currentTarget.style.background = '#FFFFFF';
                       }}
                     >
                       {cell}
