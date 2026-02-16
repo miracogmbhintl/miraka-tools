@@ -28,6 +28,12 @@ export default function HomePage() {
       href: '/html'
     },
     {
+      category: 'Media Tools',
+      headline: 'Video Downloader',
+      description: 'Download videos from YouTube, Vimeo, Instagram, and more. Convert to MP4 or extract audio as MP3.',
+      href: '/video-downloader'
+    },
+    {
       category: 'AI-powered',
       headline: 'Website Intelligence',
       description: 'Structured analysis of business clarity, positioning and conversion logic.',
