@@ -9,7 +9,7 @@ const sizeDict = {
     m: 'medium',
     l: 'large',
 };
-export const Twitter = React.forwardRef(function Twitter({ className = '', url = 'https://webflow.com', mode = 'tweet', size = 'm', text = 'Check out this site', ...props }, ref) {
+const Twitter = React.forwardRef(function Twitter({ className = '', url = 'https://webflow.com', mode = 'tweet', size = 'm', text = 'Check out this site', ...props }, ref) {
     const innerRef = React.useRef(null);
     React.useImperativeHandle(ref, () => innerRef.current);
     if (!isUrl(url)) {
@@ -41,3 +41,4 @@ export const Twitter = React.forwardRef(function Twitter({ className = '', url =
     }, []);
     return (React.createElement("div", { ...props, className: className + ' w-widget w-widget-twitter', ref: innerRef }));
 });
+export default Twitter;

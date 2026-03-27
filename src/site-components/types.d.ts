@@ -27,6 +27,9 @@ export declare namespace Embed {
         url?: string;
     };
 }
+export declare namespace Boolean {
+    type Boolean = boolean;
+}
 export declare namespace Visibility {
     type VisibilityConditions = boolean;
 }

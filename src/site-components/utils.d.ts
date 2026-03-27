@@ -3,7 +3,6 @@ import { CSSModules } from './types';
 export declare const cx: (style: CSSModules, ...classNames: string[]) => string;
 export declare const cj: (...classNames: (string | boolean | undefined)[]) => string;
 export declare const removeUnescaped: (value: string) => string;
-export declare const formatNumber: (num: number, decimals: unknown) => string;
 export declare const replaceSelector: (selector: string, styles: CSSModules) => string;
 export declare function debounce<T extends (...args: any[]) => void>(this: void, func: T, timeout?: number): (...args: Parameters<T>) => void;
 export declare const EASING_FUNCTIONS: {

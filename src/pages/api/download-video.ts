@@ -1,8 +1,8 @@
 import type { APIRoute } from 'astro';
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   try {
-    const { url, format, quality } = await request.json();
+    const { url, format } = await request.json();
 
     if (!url) {
       return new Response(
@@ -11,75 +11,64 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // ============================================
-    // BACKEND NOT YET CONFIGURED
-    // ============================================
-    // This is a placeholder API route. To make this work, you need to:
-    // 
-    // 1. Deploy yt-dlp backend service (see instructions below)
-    // 2. Set YTDLP_API_URL in your .env file
-    // 3. Uncomment the backend integration code below
-    //
-    // Example backend services:
-    // - Railway.app (recommended)
-    // - Render.com
-    // - DigitalOcean App Platform
-    // - Your own VPS
-    // ============================================
+    // Get RapidAPI key from environment
+    const rapidApiKey = locals?.runtime?.env?.RAPIDAPI_KEY || import.meta.env.RAPIDAPI_KEY;
 
-    const YTDLP_API_URL = import.meta.env.YTDLP_API_URL;
-
-    if (!YTDLP_API_URL) {
+    if (!rapidApiKey) {
       return new Response(
         JSON.stringify({ 
-          error: 'Backend not configured',
-          message: 'The video download backend is not yet set up. Please configure YTDLP_API_URL in your environment variables.',
-          documentation: 'See API_SETUP.md for deployment instructions'
+          error: 'API key not configured',
+          message: 'RapidAPI key is missing. Please add RAPIDAPI_KEY to your environment variables.'
         }),
         { status: 503, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
-    // ============================================
-    // BACKEND INTEGRATION (uncomment when ready)
-    // ============================================
-    /*
-    const backendResponse = await fetch(`${YTDLP_API_URL}/download`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        url,
-        format,
-        quality
-      })
-    });
-
-    if (!backendResponse.ok) {
-      const errorData = await backendResponse.json();
-      throw new Error(errorData.error || 'Download failed');
+    // Extract video ID from URL
+    const videoId = extractVideoId(url);
+    
+    if (!videoId) {
+      return new Response(
+        JSON.stringify({ 
+          error: 'Invalid URL',
+          message: 'Could not extract video ID from the provided URL.'
+        }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
     }
 
-    const data = await backendResponse.json();
+    // Use YouTube MP3 downloader API (works for MP4 too)
+    const apiUrl = `https://youtube-mp36.p.rapidapi.com/dl?id=${videoId}`;
+    
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host': 'youtube-mp36.p.rapidapi.com',
+        'x-rapidapi-key': rapidApiKey
+      }
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      console.error('RapidAPI Error:', errorData);
+      throw new Error(errorData.msg || errorData.error || `API returned status ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    // Check if we got a valid download link
+    if (!data.link) {
+      throw new Error('No download link available from API');
+    }
 
     return new Response(
       JSON.stringify({
         success: true,
-        downloadUrl: data.downloadUrl,
-        filename: data.filename
+        downloadUrl: data.link,
+        filename: `${data.title || 'video'}.${format}`,
+        title: data.title || 'Downloaded Video'
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
-    );
-    */
-
-    // Temporary response for testing
-    return new Response(
-      JSON.stringify({ 
-        error: 'Backend not configured',
-        message: 'Please set up the yt-dlp backend service and configure YTDLP_API_URL environment variable.'
-      }),
-      { status: 503, headers: { 'Content-Type': 'application/json' } }
     );
 
   } catch (error) {
@@ -93,3 +82,35 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 };
+
+// Helper function to extract video ID from YouTube URL
+function extractVideoId(url: string): string | null {
+  try {
+    const urlObj = new URL(url);
+    
+    // Handle youtube.com/watch?v=ID
+    if (urlObj.hostname.includes('youtube.com') || urlObj.hostname.includes('www.youtube.com')) {
+      const videoId = urlObj.searchParams.get('v');
+      if (videoId) return videoId;
+    }
+    
+    // Handle youtu.be/ID
+    if (urlObj.hostname.includes('youtu.be')) {
+      const videoId = urlObj.pathname.slice(1).split('/')[0];
+      if (videoId) return videoId;
+    }
+    
+    // Handle youtube.com/embed/ID
+    if (urlObj.pathname.includes('/embed/')) {
+      const videoId = urlObj.pathname.split('/embed/')[1]?.split('/')[0];
+      if (videoId) return videoId;
+    }
+    
+    return null;
+  } catch {
+    // If URL parsing fails, try to extract ID with regex
+    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[7].length === 11) ? match[7] : null;
+  }
+}

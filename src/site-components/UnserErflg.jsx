@@ -1,6 +1,10 @@
 "use client";
 import React from "react";
-import * as _Builtin from "./_Builtin";
+import Block from "./_Builtin/Block";
+import Grid from "./_Builtin/Grid";
+import Heading from "./_Builtin/Heading";
+import Paragraph from "./_Builtin/Paragraph";
+import Section from "./_Builtin/Section";
 import * as _interactions from "./interactions";
 
 const _interactionsData = JSON.parse(
@@ -9,7 +13,7 @@ const _interactionsData = JSON.parse(
 
 export function UnserErflg(
     {
-        as: _Component = _Builtin.Section
+        as: _Component = Section
     }
 ) {
     _interactions.useInteractions(_interactionsData);
@@ -17,36 +21,36 @@ export function UnserErflg(
     return (
         <_Component
             className="section"
-            tag="section"
             grid={{
                 type: "section"
             }}
-            id="about"><_Builtin.Block className="container top-margin---large-space" tag="div"><_Builtin.Grid className="grid" tag="div"><_Builtin.Block
+            id="about"
+            tag="section"><Block className="container top-margin---large-space" tag="div"><Grid className="grid" tag="div"><Block
                         className="divider"
                         id="w-node-_0d1d2368-f874-6da4-8170-0c196413836b-64138368"
-                        tag="div"><_Builtin.Block className="divider-filler---intro" tag="div" /></_Builtin.Block><_Builtin.Block
+                        tag="div"><Block className="divider-filler---intro" tag="div" /></Block><Block
                         className="section-title"
                         id="w-node-_0d1d2368-f874-6da4-8170-0c196413836d-64138368"
-                        tag="div"><_Builtin.Block className="dot-decoration" tag="div" /><_Builtin.Block tag="div">{"Unsere Erfahrung"}</_Builtin.Block></_Builtin.Block><_Builtin.Paragraph
+                        tag="div"><Block className="dot-decoration" tag="div" /><Block tag="div">{"Unsere Erfahrung"}</Block></Block><Paragraph
                         className="text---paragraph"
-                        id="w-node-_0d1d2368-f874-6da4-8170-0c1964138371-64138368">{"Unsere Erfolge und Auszeichnungen sind das Ergebnis konsequenter Exzellenz und enger Zusammenarbeit mit ausgewählten Partnern."}</_Builtin.Paragraph><_Builtin.Block
+                        id="w-node-_0d1d2368-f874-6da4-8170-0c1964138371-64138368">{"Unsere Erfolge und Auszeichnungen sind das Ergebnis konsequenter Exzellenz und enger Zusammenarbeit mit ausgewählten Partnern."}</Paragraph><Block
                         className="stat-list"
                         id="w-node-_0d1d2368-f874-6da4-8170-0c1964138373-64138368"
-                        tag="div"><_Builtin.Block
+                        tag="div"><Block
                             className="stat-block"
                             id="w-node-_0d1d2368-f874-6da4-8170-0c1964138374-64138368"
-                            tag="div"><_Builtin.Heading className="text---heading" tag="h2">{"6+"}</_Builtin.Heading><_Builtin.Block tag="div">{"Jahre Erfahrung"}</_Builtin.Block></_Builtin.Block><_Builtin.Block
+                            tag="div"><Heading className="text---heading" tag="h2">{"6+"}</Heading><Block tag="div">{"Jahre Erfahrung"}</Block></Block><Block
                             className="stat-block"
                             id="w-node-_0d1d2368-f874-6da4-8170-0c1964138379-64138368"
-                            tag="div"><_Builtin.Heading className="text---heading" tag="h2">{"20+"}</_Builtin.Heading><_Builtin.Block tag="div">{"Erfolgreiche Projekte"}</_Builtin.Block></_Builtin.Block><_Builtin.Block
+                            tag="div"><Heading className="text---heading" tag="h2">{"20+"}</Heading><Block tag="div">{"Erfolgreiche Projekte"}</Block></Block><Block
                             className="line-divider"
                             id="w-node-_0d1d2368-f874-6da4-8170-0c196413837e-64138368"
-                            tag="div"><_Builtin.Block className="divider-filler" tag="div" /></_Builtin.Block><_Builtin.Block className="stat-block" tag="div"><_Builtin.Heading className="text---heading" tag="h2">{"2"}</_Builtin.Heading><_Builtin.Block tag="div">{"Standorte"}</_Builtin.Block></_Builtin.Block><_Builtin.Block
+                            tag="div"><Block className="divider-filler" tag="div" /></Block><Block className="stat-block" tag="div"><Heading className="text---heading" tag="h2">{"2"}</Heading><Block tag="div">{"Standorte"}</Block></Block><Block
                             className="stat-block"
                             id="w-node-_0d1d2368-f874-6da4-8170-0c1964138385-64138368"
-                            tag="div"><_Builtin.Heading className="text---heading" tag="h2">{"8"}</_Builtin.Heading><_Builtin.Block tag="div">{"Projektpartner"}</_Builtin.Block></_Builtin.Block><_Builtin.Block
+                            tag="div"><Heading className="text---heading" tag="h2">{"8"}</Heading><Block tag="div">{"Projektpartner"}</Block></Block><Block
                             className="line-divider"
                             id="w-node-_0d1d2368-f874-6da4-8170-0c196413838a-64138368"
-                            tag="div"><_Builtin.Block className="divider-filler" tag="div" /></_Builtin.Block></_Builtin.Block></_Builtin.Grid></_Builtin.Block></_Component>
+                            tag="div"><Block className="divider-filler" tag="div" /></Block></Block></Grid></Block></_Component>
     );
 }

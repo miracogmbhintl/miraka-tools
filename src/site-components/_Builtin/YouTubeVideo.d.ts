@@ -11,5 +11,6 @@ type YouTubeVideoProps = {
     muted?: boolean;
     privacyMode?: boolean;
 };
-export declare const YouTubeVideo: React.ForwardRefExoticComponent<YouTubeVideoProps & React.RefAttributes<HTMLDivElement>>;
-export {};
+export type { YouTubeVideoProps };
+declare const YouTubeVideo: React.ForwardRefExoticComponent<YouTubeVideoProps & React.RefAttributes<HTMLDivElement>>;
+export default YouTubeVideo;

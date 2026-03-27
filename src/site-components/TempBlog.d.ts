@@ -4,16 +4,16 @@ import * as Types from "./types";
 declare function TempBlog(
     props: {
         as?: React.ElementType;
-        originalLink?: Types.Basic.Link;
-        linkedinArticle?: Types.Basic.Link;
-        twitterPostLink?: Types.Basic.Link;
-        facebookPostLink?: Types.Basic.Link;
-        slug?: React.ReactNode;
-        name?: React.ReactNode;
-        articleOwnerNme?: React.ReactNode;
         articleDate?: React.ReactNode;
-        mainImage?: Types.Asset.Image;
+        articleOwnerNme?: React.ReactNode;
         auhorName?: React.ReactNode;
         creditsTextFullLength?: React.ReactNode;
+        facebookPostLink?: Types.Basic.Link;
+        linkedinArticle?: Types.Basic.Link;
+        mainImage?: Types.Asset.Image;
+        name?: React.ReactNode;
+        originalLink?: Types.Basic.Link;
+        slug?: React.ReactNode;
+        twitterPostLink?: Types.Basic.Link;
     }
 ): React.JSX.Element

@@ -3,19 +3,6 @@ export const cx = (style, ...classNames) => cj(...classNames.map((c) => style[c]
 export const cj = (...classNames) => classNames.filter(Boolean).join(' ');
 const UNESCAPED_CHARS = /(\\b|\\f|\\r\\n|\\n|\\r|\\t|\\v)/gm;
 export const removeUnescaped = (value) => decodeURIComponent(value).replace(UNESCAPED_CHARS, '');
-const clamp = (lower, upper, n) => Math.min(Math.max(lower, n), upper);
-function clampPrecisionArg(precision) {
-    return clamp(0, 8, precision);
-}
-export const formatNumber = (num, decimals) => {
-    if (typeof num !== 'number') {
-        return num;
-    }
-    if (typeof decimals !== 'number' || decimals < 0) {
-        return String(num);
-    }
-    return num.toFixed(clampPrecisionArg(Math.floor(decimals)));
-};
 const CSS_CLASS = /\.-?[_a-zA-Z]+[_a-zA-Z0-9-]*/g;
 const WHITE_SPACE = /\s+/g;
 export const replaceSelector = (selector, styles) => {

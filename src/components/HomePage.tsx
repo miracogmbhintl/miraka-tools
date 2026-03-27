@@ -22,6 +22,18 @@ export default function HomePage() {
       href: '/image-color-picker'
     },
     {
+      category: 'Image Tools',
+      headline: 'Image Compressor',
+      description: 'Reduce image file size while maintaining quality. Compress JPG, PNG, and WebP images instantly in your browser.',
+      href: '/image-compressor'
+    },
+    {
+      category: 'Image Tools',
+      headline: 'Image Format Converter',
+      description: 'Convert images between PNG, JPEG, and WebP formats. Fast, client-side conversion with quality control.',
+      href: '/image-converter'
+    },
+    {
       category: 'Development',
       headline: 'HTML Preview',
       description: 'Write HTML and see results instantly. A clean environment for testing markup, styles, and quick experiments.',
@@ -69,3 +81,4 @@ export default function HomePage() {
     </div>
   );
 }
+

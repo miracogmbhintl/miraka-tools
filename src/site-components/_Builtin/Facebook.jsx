@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import { isUrl } from '../utils';
-export const Facebook = React.forwardRef(function Facebook({ className = '', layout = 'standard', width = 250, height = 50, url = 'https://facebook.com/webflow', locale = 'en_US', ...props }, ref) {
+const Facebook = React.forwardRef(function Facebook({ className = '', layout = 'standard', width = 250, height = 50, url = 'https://facebook.com/webflow', locale = 'en_US', ...props }, ref) {
     if (!isUrl(url)) {
         url = 'https://facebook.com/webflow';
     }
@@ -21,3 +21,4 @@ export const Facebook = React.forwardRef(function Facebook({ className = '', lay
     return (React.createElement("div", { ...props, className: className + ' w-widget w-widget-facebook', ref: ref },
         React.createElement("iframe", { title: "Facebook Like Button", src: frameSrc, style: { border: 'none', overflow: 'hidden', width, height } })));
 });
+export default Facebook;

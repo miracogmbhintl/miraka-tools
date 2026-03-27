@@ -1,6 +1,11 @@
 "use client";
 import React from "react";
-import * as _Builtin from "./_Builtin";
+import Block from "./_Builtin/Block";
+import Heading from "./_Builtin/Heading";
+import Image from "./_Builtin/Image";
+import Link from "./_Builtin/Link";
+import Paragraph from "./_Builtin/Paragraph";
+import Section from "./_Builtin/Section";
 import * as _interactions from "./interactions";
 
 const _interactionsData = JSON.parse(
@@ -9,7 +14,7 @@ const _interactionsData = JSON.parse(
 
 export function FaqStyleAboutUs(
     {
-        as: _Component = _Builtin.Section
+        as: _Component = Section
     }
 ) {
     _interactions.useInteractions(_interactionsData);
@@ -20,46 +25,46 @@ export function FaqStyleAboutUs(
             grid={{
                 type: "section"
             }}
-            tag="div"><_Builtin.Block
+            tag="div"><Block
                 className="cf-faq-main-wrapper-2 horizontal"
                 data-w-id="ad20fb19-2883-ab02-1334-de306ea96ddc"
-                tag="div"><_Builtin.Block className="cf-faqs-text-wrap-2" tag="div"><_Builtin.Heading className="cf-h2-heading-2 left" tag="h2">{"Qualität. Diskretion. Kundenfokus."}</_Builtin.Heading><_Builtin.Paragraph className="cf-faq-paragraph-2">{"Jedes Projekt verdient volle Aufmerksamkeit. Mit klaren Prinzipien stellen wir sicher, dass Ihr Auftritt schnell, präzise und auf höchstem Niveau umgesetzt wird."}</_Builtin.Paragraph><_Builtin.Block className="cf-faq-bold-text-2" tag="div">{"Haben Sie fragen an uns?"}</_Builtin.Block><_Builtin.Link
+                tag="div"><Block className="cf-faqs-text-wrap-2" tag="div"><Heading className="cf-h2-heading-2 left" tag="h2">{"Qualität. Diskretion. Kundenfokus."}</Heading><Paragraph className="cf-faq-paragraph-2">{"Jedes Projekt verdient volle Aufmerksamkeit. Mit klaren Prinzipien stellen wir sicher, dass Ihr Auftritt schnell, präzise und auf höchstem Niveau umgesetzt wird."}</Paragraph><Block className="cf-faq-bold-text-2" tag="div">{"Haben Sie fragen an uns?"}</Block><Link
+                        block="inline"
+                        button={false}
                         className="cf-call-button-2 _24px-bold"
                         data-w-id="ad20fb19-2883-ab02-1334-de306ea96de4"
-                        button={false}
-                        block="inline"
                         options={{
                             href: "#"
-                        }}><_Builtin.Block className="cf-gradient-span-2" tag="div">{"Kontaktieren Sie uns!"}</_Builtin.Block></_Builtin.Link></_Builtin.Block><_Builtin.Block className="cf-faqs-wrapper-2" tag="div"><_Builtin.Block className="cf-faq-card-2" tag="div"><_Builtin.Block className="cf-faq-question-container-3 first" tag="div"><_Builtin.Block className="cf-faq-question-wrapper-3" tag="div"><_Builtin.Block className="cf-faq-questions-2" tag="div">{"Präzision & Schnelligkeit"}<br /></_Builtin.Block><_Builtin.Image
-                                    className="cf-faq-icon-2"
-                                    loading="lazy"
-                                    width="25"
-                                    height="25"
+                        }}><Block className="cf-gradient-span-2" tag="div">{"Kontaktieren Sie uns!"}</Block></Link></Block><Block className="cf-faqs-wrapper-2" tag="div"><Block className="cf-faq-card-2" tag="div"><Block className="cf-faq-question-container-3 first" tag="div"><Block className="cf-faq-question-wrapper-3" tag="div"><Block className="cf-faq-questions-2" tag="div">{"Präzision & Schnelligkeit"}<br /></Block><Image
                                     alt=""
-                                    src="https://cdn.prod.website-files.com/68dc2b9c31cb83ac9f84a1af/68e67386044ae830cc8f310e_Plus-Symbol-PNG-Photo-Image.png" /></_Builtin.Block></_Builtin.Block><_Builtin.Block className="cf-faq-answer-wrap-2" tag="div"><_Builtin.Paragraph className="cf-faq-content-2">{"Wir realisieren Projekte mit höchster Sorgfalt und in beeindruckender Geschwindigkeit. Dank unseres One Project at a Time Ansatzes fliessen alle Kapazitäten in Ihr Vorhaben, bis es sichtbar und wirkungsvoll zum Leben erweckt ist."}</_Builtin.Paragraph></_Builtin.Block><_Builtin.Block className="cf-bottom-line-2" tag="div" /></_Builtin.Block><_Builtin.Block className="cf-faq-card-2" tag="div"><_Builtin.Block className="cf-faq-question-container-3" tag="div"><_Builtin.Block className="cf-faq-question-wrapper-3" tag="div"><_Builtin.Block className="cf-faq-questions-2" tag="div">{"Diskretion & Vertrauen"}<br /></_Builtin.Block><_Builtin.Image
                                     className="cf-faq-icon-2"
-                                    loading="lazy"
-                                    width="25"
                                     height="25"
+                                    loading="lazy"
+                                    src="https://cdn.prod.website-files.com/68dc2b9c31cb83ac9f84a1af/68e67386044ae830cc8f310e_Plus-Symbol-PNG-Photo-Image.png"
+                                    width="25" /></Block></Block><Block className="cf-faq-answer-wrap-2" tag="div"><Paragraph className="cf-faq-content-2">{"Wir realisieren Projekte mit höchster Sorgfalt und in beeindruckender Geschwindigkeit. Dank unseres One Project at a Time Ansatzes fliessen alle Kapazitäten in Ihr Vorhaben, bis es sichtbar und wirkungsvoll zum Leben erweckt ist."}</Paragraph></Block><Block className="cf-bottom-line-2" tag="div" /></Block><Block className="cf-faq-card-2" tag="div"><Block className="cf-faq-question-container-3" tag="div"><Block className="cf-faq-question-wrapper-3" tag="div"><Block className="cf-faq-questions-2" tag="div">{"Diskretion & Vertrauen"}<br /></Block><Image
                                     alt=""
-                                    src="https://cdn.prod.website-files.com/68dc2b9c31cb83ac9f84a1af/68e67386044ae830cc8f310e_Plus-Symbol-PNG-Photo-Image.png" /></_Builtin.Block></_Builtin.Block><_Builtin.Block className="cf-faq-answer-wrap-2" tag="div"><_Builtin.Paragraph className="cf-faq-content-2">{"Ob internationale Konzerne, renommierte Künstler oder Privatpersonen im High Life, wir arbeiten stets vertraulich. Absolute Verschwiegenheit, Datenschutz und Service auf höchstem Standard sind unser Fundament."}</_Builtin.Paragraph></_Builtin.Block><_Builtin.Block className="cf-bottom-line-2" tag="div" /></_Builtin.Block><_Builtin.Block className="cf-faq-card-2" tag="div"><_Builtin.Block className="cf-faq-question-container-3" tag="div"><_Builtin.Block className="cf-faq-question-wrapper-3" tag="div"><_Builtin.Block className="cf-faq-questions-2" tag="div">{"Kunde im Mittelpunkt"}<br /></_Builtin.Block><_Builtin.Image
                                     className="cf-faq-icon-2"
-                                    loading="lazy"
-                                    width="25"
                                     height="25"
+                                    loading="lazy"
+                                    src="https://cdn.prod.website-files.com/68dc2b9c31cb83ac9f84a1af/68e67386044ae830cc8f310e_Plus-Symbol-PNG-Photo-Image.png"
+                                    width="25" /></Block></Block><Block className="cf-faq-answer-wrap-2" tag="div"><Paragraph className="cf-faq-content-2">{"Ob internationale Konzerne, renommierte Künstler oder Privatpersonen im High Life, wir arbeiten stets vertraulich. Absolute Verschwiegenheit, Datenschutz und Service auf höchstem Standard sind unser Fundament."}</Paragraph></Block><Block className="cf-bottom-line-2" tag="div" /></Block><Block className="cf-faq-card-2" tag="div"><Block className="cf-faq-question-container-3" tag="div"><Block className="cf-faq-question-wrapper-3" tag="div"><Block className="cf-faq-questions-2" tag="div">{"Kunde im Mittelpunkt"}<br /></Block><Image
                                     alt=""
-                                    src="https://cdn.prod.website-files.com/68dc2b9c31cb83ac9f84a1af/68e67386044ae830cc8f310e_Plus-Symbol-PNG-Photo-Image.png" /></_Builtin.Block></_Builtin.Block><_Builtin.Block className="cf-faq-answer-wrap-2" tag="div"><_Builtin.Paragraph className="cf-faq-content-2">{"Ob internationale Konzerne, renommierte Künstler oder Privatpersonen im High Life, wir arbeiten stets vertraulich. Absolute Verschwiegenheit, Datenschutz und Service auf höchstem Standard sind unser Fundament."}</_Builtin.Paragraph></_Builtin.Block><_Builtin.Block className="cf-bottom-line-2" tag="div" /></_Builtin.Block><_Builtin.Block className="cf-faq-card-2" tag="div"><_Builtin.Block className="cf-faq-question-container-3" tag="div"><_Builtin.Block className="cf-faq-question-wrapper-3" tag="div"><_Builtin.Block className="cf-faq-questions-2" tag="div">{"What if I don’t like your design?"}<br /></_Builtin.Block><_Builtin.Image
                                     className="cf-faq-icon-2"
-                                    loading="lazy"
-                                    width="25"
                                     height="25"
+                                    loading="lazy"
+                                    src="https://cdn.prod.website-files.com/68dc2b9c31cb83ac9f84a1af/68e67386044ae830cc8f310e_Plus-Symbol-PNG-Photo-Image.png"
+                                    width="25" /></Block></Block><Block className="cf-faq-answer-wrap-2" tag="div"><Paragraph className="cf-faq-content-2">{"Ob internationale Konzerne, renommierte Künstler oder Privatpersonen im High Life, wir arbeiten stets vertraulich. Absolute Verschwiegenheit, Datenschutz und Service auf höchstem Standard sind unser Fundament."}</Paragraph></Block><Block className="cf-bottom-line-2" tag="div" /></Block><Block className="cf-faq-card-2" tag="div"><Block className="cf-faq-question-container-3" tag="div"><Block className="cf-faq-question-wrapper-3" tag="div"><Block className="cf-faq-questions-2" tag="div">{"What if I don’t like your design?"}<br /></Block><Image
                                     alt=""
-                                    src="https://cdn.prod.website-files.com/68dc2b9c31cb83ac9f84a1af/68e67386044ae830cc8f310e_Plus-Symbol-PNG-Photo-Image.png" /></_Builtin.Block></_Builtin.Block><_Builtin.Block className="cf-faq-answer-wrap-2" tag="div"><_Builtin.Paragraph className="cf-faq-content-2">{"Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore in reprehenderit in voluptate magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia laborum."}</_Builtin.Paragraph></_Builtin.Block><_Builtin.Block className="cf-bottom-line-2" tag="div" /></_Builtin.Block><_Builtin.Block className="cf-faq-card-2" tag="div"><_Builtin.Block className="cf-faq-question-container-3" tag="div"><_Builtin.Block className="cf-faq-question-wrapper-3" tag="div"><_Builtin.Block className="cf-faq-questions-2" tag="div">{"Where can I see some of your work?"}<br /></_Builtin.Block><_Builtin.Image
                                     className="cf-faq-icon-2"
-                                    loading="lazy"
-                                    width="25"
                                     height="25"
+                                    loading="lazy"
+                                    src="https://cdn.prod.website-files.com/68dc2b9c31cb83ac9f84a1af/68e67386044ae830cc8f310e_Plus-Symbol-PNG-Photo-Image.png"
+                                    width="25" /></Block></Block><Block className="cf-faq-answer-wrap-2" tag="div"><Paragraph className="cf-faq-content-2">{"Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore in reprehenderit in voluptate magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia laborum."}</Paragraph></Block><Block className="cf-bottom-line-2" tag="div" /></Block><Block className="cf-faq-card-2" tag="div"><Block className="cf-faq-question-container-3" tag="div"><Block className="cf-faq-question-wrapper-3" tag="div"><Block className="cf-faq-questions-2" tag="div">{"Where can I see some of your work?"}<br /></Block><Image
                                     alt=""
-                                    src="https://cdn.prod.website-files.com/68dc2b9c31cb83ac9f84a1af/68e67386044ae830cc8f310e_Plus-Symbol-PNG-Photo-Image.png" /></_Builtin.Block></_Builtin.Block><_Builtin.Block className="cf-faq-answer-wrap-2" tag="div"><_Builtin.Paragraph className="cf-faq-content-2">{"Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore in reprehenderit in voluptate magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia laborum."}</_Builtin.Paragraph></_Builtin.Block><_Builtin.Block className="cf-bottom-line-2" tag="div" /></_Builtin.Block></_Builtin.Block></_Builtin.Block></_Component>
+                                    className="cf-faq-icon-2"
+                                    height="25"
+                                    loading="lazy"
+                                    src="https://cdn.prod.website-files.com/68dc2b9c31cb83ac9f84a1af/68e67386044ae830cc8f310e_Plus-Symbol-PNG-Photo-Image.png"
+                                    width="25" /></Block></Block><Block className="cf-faq-answer-wrap-2" tag="div"><Paragraph className="cf-faq-content-2">{"Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore in reprehenderit in voluptate magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia laborum."}</Paragraph></Block><Block className="cf-bottom-line-2" tag="div" /></Block></Block></Block></_Component>
     );
 }
