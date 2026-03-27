@@ -1,3 +1,4 @@
+
 import { useState, useRef } from 'react';
 import { Upload, Download, X, Trash2 } from 'lucide-react';
 import { baseUrl } from '../lib/base-url';
@@ -86,38 +87,90 @@ export default function ImageCompressorTool() {
       const img = new Image();
       img.src = image.preview;
 
-      await new Promise((resolve) => {
+      await new Promise((resolve, reject) => {
         img.onload = resolve;
+        img.onerror = reject;
       });
 
+      // Determine if image has transparency
+      const hasTransparency = await checkTransparency(img);
+      
+      // Calculate new dimensions (max 1920px on longest side)
+      const maxDimension = 1920;
+      let width = img.width;
+      let height = img.height;
+      
+      if (width > maxDimension || height > maxDimension) {
+        if (width > height) {
+          height = (height / width) * maxDimension;
+          width = maxDimension;
+        } else {
+          width = (width / height) * maxDimension;
+          height = maxDimension;
+        }
+      }
+
       const canvas = document.createElement('canvas');
-      canvas.width = img.width;
-      canvas.height = img.height;
+      canvas.width = width;
+      canvas.height = height;
 
       const ctx = canvas.getContext('2d');
       if (!ctx) throw new Error('Canvas context not available');
 
-      ctx.drawImage(img, 0, 0);
+      // Use better image rendering
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      
+      ctx.drawImage(img, 0, 0, width, height);
+
+      // Convert PNG to JPEG unless it has transparency
+      const outputFormat = hasTransparency ? 'image/png' : 'image/jpeg';
+      const compressionQuality = quality / 100;
 
       canvas.toBlob(
         (blob) => {
           if (blob) {
-            setImages((prev) =>
-              prev.map((img) =>
-                img.id === imageId
-                  ? {
-                      ...img,
-                      compressedBlob: blob,
-                      compressedSize: blob.size,
-                      isProcessing: false
-                    }
-                  : img
-              )
-            );
+            // Only update if compression actually reduced size
+            if (blob.size < image.originalSize || width < img.width || height < img.height) {
+              setImages((prev) =>
+                prev.map((img) =>
+                  img.id === imageId
+                    ? {
+                        ...img,
+                        compressedBlob: blob,
+                        compressedSize: blob.size,
+                        isProcessing: false
+                      }
+                    : img
+                )
+              );
+            } else {
+              // If no reduction, try again with lower quality
+              canvas.toBlob(
+                (secondBlob) => {
+                  if (secondBlob) {
+                    setImages((prev) =>
+                      prev.map((img) =>
+                        img.id === imageId
+                          ? {
+                              ...img,
+                              compressedBlob: secondBlob,
+                              compressedSize: secondBlob.size,
+                              isProcessing: false
+                            }
+                          : img
+                      )
+                    );
+                  }
+                },
+                'image/jpeg',
+                Math.max(0.6, compressionQuality - 0.2)
+              );
+            }
           }
         },
-        image.file.type,
-        quality / 100
+        outputFormat,
+        compressionQuality
       );
     } catch (error) {
       console.error('Compression failed:', error);
@@ -126,6 +179,40 @@ export default function ImageCompressorTool() {
         prev.map((img) => (img.id === imageId ? { ...img, isProcessing: false } : img))
       );
     }
+  };
+
+  // Helper function to check if image has transparency
+  const checkTransparency = (img: HTMLImageElement): Promise<boolean> => {
+    return new Promise((resolve) => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      
+      if (!ctx) {
+        resolve(false);
+        return;
+      }
+      
+      ctx.drawImage(img, 0, 0);
+      
+      try {
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+        
+        // Check alpha channel (every 4th value)
+        for (let i = 3; i < data.length; i += 4) {
+          if (data[i] < 255) {
+            resolve(true);
+            return;
+          }
+        }
+        resolve(false);
+      } catch (e) {
+        // If we can't read the image data, assume no transparency
+        resolve(false);
+      }
+    });
   };
 
   const compressAll = async () => {
@@ -779,3 +866,4 @@ export default function ImageCompressorTool() {
     </>
   );
 }
+
