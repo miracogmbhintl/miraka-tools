@@ -55,6 +55,7 @@ export { default as HFlex } from './HFlex';
 export { default as Heading } from './Heading';
 export { default as HtmlEmbed } from './HtmlEmbed';
 export { default as Icon } from './Icon';
+export { default as Iframe } from './Iframe';
 export { default as Image } from './Image';
 export { default as InlineCode } from './InlineCode';
 export { default as Layout } from './Layout';

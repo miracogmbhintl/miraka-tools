@@ -63,18 +63,26 @@ export default function HTMLPreviewTool() {
   };
 
   const downloadPNG = async () => {
-    if (!iframeRef.current?.contentDocument?.body) return;
+    if (!iframeRef.current?.contentDocument?.body) {
+      console.error('Iframe content not accessible');
+      alert('Preview content not ready. Please wait a moment and try again.');
+      return;
+    }
     
     try {
+      console.log('Capturing PNG screenshot...');
       const canvas = await html2canvas(iframeRef.current.contentDocument.body, {
         useCORS: true,
         allowTaint: true,
         scrollY: 0,
-        scrollX: 0
+        scrollX: 0,
+        backgroundColor: '#FFFFFF'
       });
       
+      console.log('Converting to blob...');
       canvas.toBlob((blob) => {
         if (blob) {
+          console.log('Downloading PNG...');
           const url = URL.createObjectURL(blob);
           const link = document.createElement('a');
           link.href = url;
@@ -83,6 +91,10 @@ export default function HTMLPreviewTool() {
           link.click();
           document.body.removeChild(link);
           URL.revokeObjectURL(url);
+          console.log('PNG downloaded successfully');
+        } else {
+          console.error('Failed to create blob from canvas');
+          alert('Failed to create PNG. Please try again.');
         }
       }, 'image/png');
     } catch (error) {
@@ -93,6 +105,7 @@ export default function HTMLPreviewTool() {
 
   const downloadHTML = () => {
     try {
+      console.log('Downloading HTML...');
       const blob = new Blob([htmlCode], { type: 'text/html;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -102,6 +115,7 @@ export default function HTMLPreviewTool() {
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
+      console.log('HTML downloaded successfully');
     } catch (error) {
       console.error('HTML download failed:', error);
       alert('Failed to download HTML. Please try again.');
@@ -110,6 +124,7 @@ export default function HTMLPreviewTool() {
 
   const downloadTXT = () => {
     try {
+      console.log('Downloading TXT...');
       const blob = new Blob([htmlCode], { type: 'text/plain;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -119,6 +134,7 @@ export default function HTMLPreviewTool() {
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
+      console.log('TXT downloaded successfully');
     } catch (error) {
       console.error('TXT download failed:', error);
       alert('Failed to download TXT. Please try again.');
@@ -127,9 +143,11 @@ export default function HTMLPreviewTool() {
 
   const downloadZIP = async () => {
     try {
+      console.log('Creating ZIP...');
       const zip = new JSZip();
       zip.file('index.html', htmlCode);
       
+      console.log('Generating ZIP blob...');
       const blob = await zip.generateAsync({ 
         type: 'blob',
         compression: 'DEFLATE',
@@ -138,6 +156,7 @@ export default function HTMLPreviewTool() {
         }
       });
       
+      console.log('Downloading ZIP...');
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
@@ -146,6 +165,7 @@ export default function HTMLPreviewTool() {
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
+      console.log('ZIP downloaded successfully');
     } catch (error) {
       console.error('ZIP creation failed:', error);
       alert('Failed to create ZIP. Please try again.');
@@ -562,7 +582,12 @@ export default function HTMLPreviewTool() {
             }}>
               <div style={{ display: 'flex', gap: '8px' }}>
                 <button
-                  onClick={downloadHTML}
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    downloadHTML();
+                  }}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -595,7 +620,12 @@ export default function HTMLPreviewTool() {
                 </button>
 
                 <button
-                  onClick={downloadTXT}
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    downloadTXT();
+                  }}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -710,7 +740,12 @@ export default function HTMLPreviewTool() {
             }}>
               <div style={{ display: 'flex', gap: '8px' }}>
                 <button
-                  onClick={downloadPNG}
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    downloadPNG();
+                  }}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -743,7 +778,12 @@ export default function HTMLPreviewTool() {
                 </button>
 
                 <button
-                  onClick={downloadZIP}
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    downloadZIP();
+                  }}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -782,6 +822,8 @@ export default function HTMLPreviewTool() {
     </>
   );
 }
+
+
 
 
 
