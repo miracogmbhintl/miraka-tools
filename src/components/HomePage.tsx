@@ -64,12 +64,14 @@ export default function HomePage() {
             headline={tool.headline}
             description={tool.description}
             href={tool.href}
+            badge={tool.badge}
           />
         ))}
       </div>
     </div>
   );
 }
+
 
 
 
