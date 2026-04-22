@@ -16,28 +16,26 @@ export function ToolCard({ category, headline, description, href, badge }: ToolC
       className="tool-panel"
     >
       <div className="tool-panel-inner">
-        {badge && (
-          <div style={{
-            position: 'absolute',
-            top: '16px',
-            right: '16px',
-            background: '#EF4444',
-            color: '#FFFFFF',
-            padding: '4px 10px',
-            borderRadius: '6px',
-            fontSize: '11px',
-            fontWeight: 700,
-            fontFamily: 'Inter Tight, sans-serif',
-            textTransform: 'uppercase',
-            letterSpacing: '0.5px',
-            zIndex: 10
-          }}>
-            {badge}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem' }}>
+          <div className="tool-panel-category">
+            {category}
           </div>
-        )}
-        
-        <div className="tool-panel-category">
-          {category}
+          
+          {badge && (
+            <div style={{
+              background: '#EF4444',
+              color: '#FFFFFF',
+              padding: '4px 10px',
+              borderRadius: '6px',
+              fontSize: '11px',
+              fontWeight: 700,
+              fontFamily: 'Inter Tight, sans-serif',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px'
+            }}>
+              {badge}
+            </div>
+          )}
         </div>
         
         <h2 className="tool-panel-headline">
@@ -59,6 +57,7 @@ export function ToolCard({ category, headline, description, href, badge }: ToolC
     </a>
   );
 }
+
 
 
 
