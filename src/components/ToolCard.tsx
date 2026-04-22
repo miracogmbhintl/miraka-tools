@@ -6,15 +6,36 @@ interface ToolCardProps {
   headline: string;
   description: string;
   href: string;
+  badge?: string;
 }
 
-export function ToolCard({ category, headline, description, href }: ToolCardProps) {
+export function ToolCard({ category, headline, description, href, badge }: ToolCardProps) {
   return (
     <a
       href={`${baseUrl}${href}`}
       className="tool-panel"
     >
       <div className="tool-panel-inner">
+        {badge && (
+          <div style={{
+            position: 'absolute',
+            top: '16px',
+            right: '16px',
+            background: '#EF4444',
+            color: '#FFFFFF',
+            padding: '4px 10px',
+            borderRadius: '6px',
+            fontSize: '11px',
+            fontWeight: 700,
+            fontFamily: 'Inter Tight, sans-serif',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+            zIndex: 10
+          }}>
+            {badge}
+          </div>
+        )}
+        
         <div className="tool-panel-category">
           {category}
         </div>
@@ -38,5 +59,6 @@ export function ToolCard({ category, headline, description, href }: ToolCardProp
     </a>
   );
 }
+
 
 

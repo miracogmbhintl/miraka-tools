@@ -25,7 +25,8 @@ export default function HomePage() {
       category: 'Image Tools',
       headline: 'Image Processor',
       description: 'Compress, convert formats (PNG/JPG/WebP), resize by pixels, and crop images. All-in-one image manipulation tool.',
-      href: '/image-compressor'
+      href: '/image-compressor',
+      badge: 'NEW FEATURES'
     },
     {
       category: 'Development',
@@ -69,5 +70,6 @@ export default function HomePage() {
     </div>
   );
 }
+
 
 
