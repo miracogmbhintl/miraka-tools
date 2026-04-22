@@ -1,4 +1,8 @@
 
+
+
+
+
 import { useState, useRef } from 'react';
 import { Upload, Download, X, Trash2 } from 'lucide-react';
 import { baseUrl } from '../lib/base-url';
@@ -12,6 +16,7 @@ interface ImageFile {
   compressedBlob: Blob | null;
   compressedSize: number;
   isProcessing: boolean;
+  outputFormat?: string;
 }
 
 export default function ImageCompressorTool() {
@@ -127,54 +132,50 @@ export default function ImageCompressorTool() {
       const outputFormat = hasTransparency ? 'image/png' : 'image/jpeg';
       const compressionQuality = quality / 100;
 
-      canvas.toBlob(
-        (blob) => {
-          if (blob) {
-            // Only update if compression actually reduced size
-            if (blob.size < image.originalSize || width < img.width || height < img.height) {
-              setImages((prev) =>
-                prev.map((img) =>
-                  img.id === imageId
-                    ? {
-                        ...img,
-                        compressedBlob: blob,
-                        compressedSize: blob.size,
-                        isProcessing: false
-                      }
-                    : img
-                )
-              );
-            } else {
-              // If no reduction, try again with lower quality
-              canvas.toBlob(
-                (secondBlob) => {
-                  if (secondBlob) {
-                    setImages((prev) =>
-                      prev.map((img) =>
-                        img.id === imageId
-                          ? {
-                              ...img,
-                              compressedBlob: secondBlob,
-                              compressedSize: secondBlob.size,
-                              isProcessing: false
-                            }
-                          : img
-                      )
-                    );
-                  }
-                },
-                'image/jpeg',
-                Math.max(0.6, compressionQuality - 0.2)
-              );
-            }
+      // Use promises instead of callbacks for better error handling
+      const createBlob = (format: string, qual: number): Promise<Blob | null> => {
+        return new Promise((resolve) => {
+          canvas.toBlob(
+            (blob) => resolve(blob),
+            format,
+            qual
+          );
+        });
+      };
+
+      let blob = await createBlob(outputFormat, compressionQuality);
+      
+      if (!blob) {
+        throw new Error('Failed to create blob');
+      }
+
+      // Only update if compression actually reduced size
+      if (blob.size >= image.originalSize && (width >= img.width && height >= img.height)) {
+        // If no reduction, try again with lower quality for JPEG
+        if (!hasTransparency) {
+          const secondBlob = await createBlob('image/jpeg', Math.max(0.6, compressionQuality - 0.2));
+          if (secondBlob) {
+            blob = secondBlob;
           }
-        },
-        outputFormat,
-        compressionQuality
+        }
+      }
+
+      setImages((prev) =>
+        prev.map((img) =>
+          img.id === imageId
+            ? {
+                ...img,
+                compressedBlob: blob,
+                compressedSize: blob!.size,
+                isProcessing: false,
+                outputFormat: outputFormat
+              }
+            : img
+        )
       );
     } catch (error) {
       console.error('Compression failed:', error);
-      alert('Failed to compress image');
+      alert('Failed to compress image. Please try again.');
       setImages((prev) =>
         prev.map((img) => (img.id === imageId ? { ...img, isProcessing: false } : img))
       );
@@ -232,8 +233,12 @@ export default function ImageCompressorTool() {
     const url = URL.createObjectURL(image.compressedBlob);
     const link = document.createElement('a');
     link.href = url;
-    const extension = image.file.name.split('.').pop();
-    link.download = `compressed-${image.file.name}`;
+    
+    // Get the correct extension based on output format
+    const extension = image.outputFormat === 'image/png' ? 'png' : 'jpg';
+    const baseName = image.file.name.replace(/\.[^/.]+$/, ''); // Remove original extension
+    link.download = `compressed-${baseName}.${extension}`;
+    
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -257,7 +262,9 @@ export default function ImageCompressorTool() {
     const zip = new JSZip();
     compressedImages.forEach((image) => {
       if (image.compressedBlob) {
-        zip.file(`compressed-${image.file.name}`, image.compressedBlob);
+        const extension = image.outputFormat === 'image/png' ? 'png' : 'jpg';
+        const baseName = image.file.name.replace(/\.[^/.]+$/, ''); // Remove original extension
+        zip.file(`compressed-${baseName}.${extension}`, image.compressedBlob);
       }
     });
 
@@ -866,4 +873,8 @@ export default function ImageCompressorTool() {
     </>
   );
 }
+
+
+
+
 
