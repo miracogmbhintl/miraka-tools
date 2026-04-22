@@ -1,5 +1,6 @@
 
 
+
 ---
 import '../../generated/fonts.css';
 import '../site-components/global.css';
@@ -9,31 +10,46 @@ const { pageClass = '' } = Astro.props;
 ---
 
 <html lang="en" class={pageClass}>
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<link rel="icon" type="image/png" href="/favicon.png" />
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Miraka & Co. Tools</title>
-	</head>
-	<!-- Dark mode class injection point - will be replaced with `dark` class based on your site palette -->
-	<body class="__DARK_MODE_CLASS__">
-    <slot />
-  </body>
+<head>
+<meta charset="utf-8" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q7NQZ4HTYJ"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Q7NQZ4HTYJ', {
+    'send_page_view': true,
+    'page_title': document.title,
+    'page_location': window.location.href,
+    'page_path': window.location.pathname
+  });
+</script>
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<meta name="viewport" content="width=device-width" />
+<meta name="generator" content={Astro.generator} />
+<title>Miraka & Co. Tools</title>
+</head>
+<!-- Dark mode class injection point - will be replaced with `dark` class based on your site palette -->
+<body class="__DARK_MODE_CLASS__">
+<slot />
+</body>
 </html>
 
 <style is:global>
-  /* Page-specific overrides */
-  html.splash main { 
-    display: flex !important; 
-  }
-  
-  html.splash ol,
-  html.splash ul { 
-    padding-left: 0 !important; 
-    margin: 0 !important; 
-  }
+/* Page-specific overrides */
+html.splash main { 
+display: flex !important; 
+}
+
+html.splash ol,
+html.splash ul { 
+padding-left: 0 !important; 
+margin: 0 !important; 
+}
 </style>
+
 

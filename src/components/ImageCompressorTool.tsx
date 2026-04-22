@@ -303,6 +303,32 @@ export default function ImageCompressorTool() {
           padding-right: 16px;
           height: 100%;
         }
+
+        .img-upload-card {
+          background: #FFFFFF;
+          border-radius: 14px;
+          padding: 32px;
+          border: 1px solid #E5E7EB;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+          flex: ${!hasImages ? '1' : '0 0 auto'};
+          display: flex;
+          flex-direction: column;
+        }
+
+        .img-upload-area {
+          border: 2px dashed #E5E7EB;
+          border-radius: 12px;
+          padding: 64px 24px;
+          text-align: center;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          background: #F9FAFB;
+          flex: ${!hasImages ? '1' : '0 0 auto'};
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
         
         .img-right-column {
           position: sticky;
@@ -363,6 +389,15 @@ export default function ImageCompressorTool() {
             height: auto;
             overflow: visible;
           }
+
+          .img-upload-card {
+            flex: 0 0 auto;
+          }
+
+          .img-upload-area {
+            flex: 0 0 auto;
+            min-height: 300px;
+          }
           
           .img-right-column {
             position: relative;
@@ -411,26 +446,12 @@ export default function ImageCompressorTool() {
           <div className="img-left-column">
             
             {/* Upload Area */}
-            <div style={{
-              background: '#FFFFFF',
-              borderRadius: '14px',
-              padding: '32px',
-              border: '1px solid #E5E7EB',
-              boxShadow: '0 1px 2px rgba(0, 0, 0, 0.04)'
-            }}>
+            <div className="img-upload-card">
               <div
+                className="img-upload-area"
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
                 onClick={() => fileInputRef.current?.click()}
-                style={{
-                  border: '2px dashed #E5E7EB',
-                  borderRadius: '12px',
-                  padding: '64px 24px',
-                  textAlign: 'center',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  background: '#F9FAFB'
-                }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = '#F37021';
                   e.currentTarget.style.background = '#FFF7F3';
@@ -1012,3 +1033,5 @@ export default function ImageCompressorTool() {
     </>
   );
 }
+
+

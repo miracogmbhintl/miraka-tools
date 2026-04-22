@@ -323,13 +323,14 @@ export default function HTMLPreviewTool() {
       document.addEventListener('mouseup', handleMouseUp);
       document.body.style.cursor = 'col-resize';
       document.body.style.userSelect = 'none';
+    } else {
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
     }
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
-      document.body.style.cursor = '';
-      document.body.style.userSelect = '';
     };
   }, [isDragging]);
 
@@ -677,7 +678,7 @@ export default function HTMLPreviewTool() {
                     width: '3px',
                     height: '3px',
                     borderRadius: '50%',
-                    background: isDragging ? '#F37021' : '#D1D5DB',
+                    background: isDragging ? '#1A1A1A' : '#D1D5DB',
                     transform: isDragging ? 'scale(1.3)' : 'scale(1)',
                     transition: isDragging ? 'none' : 'all 0.2s ease'
                   }}
@@ -822,6 +823,8 @@ export default function HTMLPreviewTool() {
     </>
   );
 }
+
+
 
 
 
