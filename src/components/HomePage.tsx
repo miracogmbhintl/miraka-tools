@@ -23,27 +23,15 @@ export default function HomePage() {
     },
     {
       category: 'Image Tools',
-      headline: 'Image Compressor',
-      description: 'Reduce image file size while maintaining quality. Compress JPG, PNG, and WebP images instantly in your browser.',
+      headline: 'Image Processor',
+      description: 'Compress, convert formats (PNG/JPG/WebP), resize by pixels, and crop images. All-in-one image manipulation tool.',
       href: '/image-compressor'
-    },
-    {
-      category: 'Image Tools',
-      headline: 'Image Format Converter',
-      description: 'Convert images between PNG, JPEG, and WebP formats. Fast, client-side conversion with quality control.',
-      href: '/image-converter'
     },
     {
       category: 'Development',
       headline: 'HTML Preview',
       description: 'Write HTML and see results instantly. A clean environment for testing markup, styles, and quick experiments.',
       href: '/html'
-    },
-    {
-      category: 'Media Tools',
-      headline: 'Video Downloader',
-      description: 'Download videos from YouTube, Vimeo, Instagram, and more. Convert to MP4 or extract audio as MP3.',
-      href: '/video-downloader'
     },
     {
       category: 'AI-powered',
@@ -81,4 +69,5 @@ export default function HomePage() {
     </div>
   );
 }
+
 
