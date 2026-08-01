@@ -2,7 +2,21 @@ import type { APIRoute } from 'astro';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const { url, analysisData } = await request.json();
+    const body = await request.json() as {
+      analysisData?: any;
+    };
+
+    const { analysisData } = body;
+
+    if (!analysisData) {
+      return new Response(
+        JSON.stringify({ error: 'Analysis data is required.' }),
+        {
+          status: 400,
+          headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        },
+      );
+    }
 
     const currentDate = new Date().toLocaleDateString('en-GB', {
       day: 'numeric',
