@@ -25,6 +25,36 @@ import HTMLPreviewTool from '../components/HTMLPreviewTool';
   </style>
   <script is:inline>
     (() => {
+      const originalWrite = Document.prototype.write;
+      const previewPolicy = [
+        "default-src 'none'",
+        "script-src 'none'",
+        "connect-src 'none'",
+        "object-src 'none'",
+        "frame-src 'none'",
+        "form-action 'none'",
+        "base-uri 'none'",
+        "img-src data: blob: https: http:",
+        "media-src data: blob: https: http:",
+        "font-src data: https: http:",
+        "style-src 'unsafe-inline' https: http:",
+      ].join('; ');
+
+      Document.prototype.write = function (...chunks) {
+        const frame = this.defaultView?.frameElement;
+        if (!(frame instanceof HTMLIFrameElement) || frame.title !== 'HTML Preview') {
+          return originalWrite.apply(this, chunks);
+        }
+
+        const policyTag = `<meta http-equiv="Content-Security-Policy" content="${previewPolicy}">`;
+        const html = chunks.join('');
+        const securedHtml = /<head(?:\s[^>]*)?>/i.test(html)
+          ? html.replace(/<head(\s[^>]*)?>/i, (match) => `${match}${policyTag}`)
+          : `${policyTag}${html}`;
+
+        return originalWrite.call(this, securedHtml);
+      };
+
       const securePreview = (root = document) => {
         root.querySelectorAll?.('iframe[title="HTML Preview"]').forEach((iframe) => {
           if (iframe.getAttribute('sandbox') !== 'allow-same-origin') {
