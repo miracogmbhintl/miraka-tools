@@ -42,10 +42,9 @@ import HTMLPreviewTool from '../components/HTMLPreviewTool';
         }
       });
 
-      document.addEventListener('DOMContentLoaded', () => {
-        securePreview();
-        observer.observe(document.body, { childList: true, subtree: true });
-      });
+      observer.observe(document.documentElement, { childList: true, subtree: true });
+      securePreview();
+      document.addEventListener('DOMContentLoaded', () => securePreview(), { once: true });
     })();
   </script>
 </head>
