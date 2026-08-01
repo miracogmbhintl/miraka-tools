@@ -40,6 +40,10 @@ function isBlockedIpv4(parts: number[]): boolean {
 
 function isBlockedIpv6(hostname: string): boolean {
   const normalized = hostname.replace(/^\[|\]$/g, '').toLowerCase();
+  const mappedIpv4 = normalized.startsWith('::ffff:')
+    ? parseIpv4(normalized.slice('::ffff:'.length))
+    : null;
+
   return (
     normalized === '::' ||
     normalized === '::1' ||
@@ -47,9 +51,7 @@ function isBlockedIpv6(hostname: string): boolean {
     normalized.startsWith('fd') ||
     /^fe[89ab]/.test(normalized) ||
     normalized.startsWith('2001:db8:') ||
-    normalized.startsWith('::ffff:127.') ||
-    normalized.startsWith('::ffff:10.') ||
-    normalized.startsWith('::ffff:192.168.')
+    Boolean(mappedIpv4 && isBlockedIpv4(mappedIpv4))
   );
 }
 
@@ -70,7 +72,8 @@ export function validatePublicWebsiteUrl(input: string): URL {
     throw new Error('URLs containing credentials are not supported.');
   }
 
-  if (url.port && !['80', '443'].includes(url.port)) {
+  const allowedPort = url.protocol === 'http:' ? '80' : '443';
+  if (url.port && url.port !== allowedPort) {
     throw new Error('Non-standard network ports are not supported.');
   }
 
@@ -114,6 +117,7 @@ async function readLimitedText(response: Response): Promise<string> {
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
+      if (!value) continue;
 
       received += value.byteLength;
       if (received > MAX_RESPONSE_BYTES) {
