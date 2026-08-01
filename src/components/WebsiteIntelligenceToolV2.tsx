@@ -105,6 +105,23 @@ type TextComparison = {
   reason: string;
 };
 
+type AnalyzeWebsiteApiResponse = {
+  error?: string;
+  data?: AnalysisData;
+  websiteData?: WebsiteData;
+};
+
+type TextImprovementsApiResponse = {
+  success?: boolean;
+  improvements?: TextComparison[];
+  error?: string;
+};
+
+type GeneratePdfApiResponse = {
+  html?: string;
+  error?: string;
+};
+
 // Collapsible Insight Component
 function InsightDropdown({ 
   title, 
@@ -272,10 +289,14 @@ export default function AnalysisPageV2() {
         body: JSON.stringify({ url: finalUrl })
       });
 
-      const result = await response.json();
+      const result = await response.json() as AnalyzeWebsiteApiResponse;
 
       if (!response.ok) {
         throw new Error(result.error || 'Analysis failed');
+      }
+
+      if (!result.data || !result.websiteData) {
+        throw new Error('The analysis service returned an incomplete response.');
       }
 
       // Complete all steps
@@ -323,8 +344,8 @@ export default function AnalysisPageV2() {
       });
 
       if (response.ok) {
-        const result = await response.json();
-        if (result.success && result.improvements) {
+        const result = await response.json() as TextImprovementsApiResponse;
+        if (result.success && Array.isArray(result.improvements)) {
           // Update analysis data with text comparisons
           setAnalysisData(prev => prev ? {
             ...prev,
@@ -520,11 +541,13 @@ export default function AnalysisPageV2() {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to generate PDF');
+      const result = await response.json() as GeneratePdfApiResponse;
+
+      if (!response.ok || typeof result.html !== 'string') {
+        throw new Error(result.error || 'Failed to generate PDF');
       }
 
-      const { html } = await response.json();
+      const html = result.html;
       
       // Open in new window and trigger print
       const printWindow = window.open('', '_blank');
@@ -1492,7 +1515,7 @@ export default function AnalysisPageV2() {
                       .replace(/^./, str => str.toUpperCase())
                       .trim();
                     
-                    const sourceKey = key as keyof typeof analysisData.sources.coreVariables;
+                    const sourceKey = key as keyof NonNullable<AnalysisData['sources']>['coreVariables'];
                     const source = analysisData.sources?.coreVariables[sourceKey];
 
                     return (
