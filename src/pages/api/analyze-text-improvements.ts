@@ -87,9 +87,16 @@ Return JSON with this structure:
     const content = payload.choices?.[0]?.message?.content;
     if (!content) throw new Error('The text analysis service returned an empty response.');
 
-    const parsed = responseSchema.safeParse(JSON.parse(content));
-    if (!parsed.success) {
+    let parsedContent: unknown;
+    try {
+      parsedContent = JSON.parse(content);
+    } catch {
       throw new Error('The text analysis service returned an invalid response.');
+    }
+
+    const parsed = responseSchema.safeParse(parsedContent);
+    if (!parsed.success) {
+      throw new Error('The text analysis service returned an incomplete response.');
     }
 
     return jsonResponse({
@@ -98,7 +105,8 @@ Return JSON with this structure:
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Text analysis failed.';
+    const clientError = /invalid json request body|request body is too large/i.test(message);
     console.error('[Text Improvements]', message);
-    return jsonResponse({ error: message }, 502);
+    return jsonResponse({ error: message }, clientError ? 400 : 502);
   }
 };
