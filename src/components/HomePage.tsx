@@ -29,6 +29,13 @@ export default function HomePage() {
       badge: 'NEW FEATURES'
     },
     {
+      category: 'Social Tools',
+      headline: 'Instagram Carousel Maker',
+      description: 'Arrange, crop, edit and annotate photos for a polished Instagram carousel. Export slides individually or as a ZIP.',
+      href: '/carousel-maker',
+      badge: 'NEW'
+    },
+    {
       category: 'Development',
       headline: 'HTML Preview',
       description: 'Write HTML and see results instantly. A clean environment for testing markup, styles, and quick experiments.',
@@ -71,7 +78,3 @@ export default function HomePage() {
     </div>
   );
 }
-
-
-
-
