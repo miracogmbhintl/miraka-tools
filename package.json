@@ -5,6 +5,7 @@
   "scripts": {
     "predev": "npx kill-port 3000 || true",
     "dev": "astro dev",
+    "typecheck": "astro check",
     "build": "astro build",
     "preview": "astro build && wrangler dev",
     "astro": "astro",
