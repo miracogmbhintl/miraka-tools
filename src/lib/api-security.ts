@@ -12,13 +12,13 @@ type RateLimitRecord = {
 const rateLimitBuckets = new Map<string, RateLimitRecord>();
 
 export function jsonResponse(payload: unknown, status = 200, headers: HeadersInit = {}): Response {
+  const responseHeaders = new Headers(headers);
+  responseHeaders.set('Content-Type', 'application/json; charset=utf-8');
+  responseHeaders.set('Cache-Control', 'no-store');
+
   return new Response(JSON.stringify(payload), {
     status,
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
-      'Cache-Control': 'no-store',
-      ...headers,
-    },
+    headers: responseHeaders,
   });
 }
 
@@ -79,5 +79,9 @@ export async function readJsonBody<T>(request: Request, maxBytes = 64_000): Prom
     throw new Error('Request body is too large.');
   }
 
-  return JSON.parse(text) as T;
+  try {
+    return JSON.parse(text) as T;
+  } catch {
+    throw new Error('Invalid JSON request body.');
+  }
 }
